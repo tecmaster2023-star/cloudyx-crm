@@ -289,6 +289,6 @@ Adotamos integralmente o **bundle herdado** da referência *Aula CRM Nichado WAH
 
 📧 rafael@maudibrasil.com.br
 📍 São Paulo, BR
-🔗 docs: github.com/melgarafael/cloudyx-crm (em breve)
+🔗 docs: github.com/srkyler/cloudyx-crm (em breve)
 
 **Perguntas?**

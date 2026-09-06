@@ -524,4 +524,4 @@ Bem-vindo ao CloudyX CRM. 🛠️
 
 ---
 
-> **Achou um erro neste guia?** Abra uma [issue](https://github.com/melgarafael/cloudyx-crm/issues) ou mande um PR — esse doc vive da contribuição da comunidade.
+> **Achou um erro neste guia?** Abra uma [issue](https://github.com/srkyler/cloudyx-crm/issues) ou mande um PR — esse doc vive da contribuição da comunidade.

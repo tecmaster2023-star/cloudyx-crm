@@ -58,7 +58,7 @@ CRM que abre a tela de login e não deixa ninguém entrar.
 
 ```bash
 cd /var/www
-git clone https://github.com/melgarafael/cloudyx-crm.git CloudyX CRM
+git clone https://github.com/srkyler/cloudyx-crm.git CloudyX CRM
 cd /var/www/CloudyX CRM
 cp .env.hostgator.example .env
 nano .env

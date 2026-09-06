@@ -103,7 +103,7 @@ desde 2026-08-13.**
 **Os cinco são checks obrigatórios** na branch protection da `main` — medido em 2026-08-14 @ `741c4ec8`:
 
 ```console
-$ gh api repos/melgarafael/cloudyx-crm/branches/main/protection --jq '.required_status_checks.contexts|join(", ")'
+$ gh api repos/srkyler/cloudyx-crm/branches/main/protection --jq '.required_status_checks.contexts|join(", ")'
 verify, build-and-size, invariants, e2e, imagens-ok
 ```
 

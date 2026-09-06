@@ -11,7 +11,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript)](https://www.typescriptlang.org)
 [![Supabase](https://img.shields.io/badge/Supabase-Postgres%2BAuth%2BStorage-3ecf8e?logo=supabase)](https://supabase.com)
 [![Self-hosted](https://img.shields.io/badge/self--hosted-1%20comando-orange)](hostgator-setup-kit/)
-[![CI](https://github.com/melgarafael/cloudyx-crm/actions/workflows/ci.yml/badge.svg)](https://github.com/melgarafael/cloudyx-crm/actions/workflows/ci.yml)
+[![CI](https://github.com/srkyler/cloudyx-crm/actions/workflows/ci.yml/badge.svg)](https://github.com/srkyler/cloudyx-crm/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 [**⚡ Instalar**](#-instalar-en-tu-vps-el-camino-principal) · [**🔄 Actualizar**](#-actualizar) · [**🧭 Visión**](VISION.md) · [**🏗️ Arquitectura**](ARCHITECTURE.md) · [**🤝 Contribuir**](CONTRIBUTING.md) · [**🗺️ Roadmap**](#%EF%B8%8F-roadmap)
@@ -34,7 +34,7 @@
 > devuelve el comando exacto para tu caso:
 >
 > ```bash
-> curl -fsSL https://raw.githubusercontent.com/melgarafael/cloudyx-crm/main/hostgator-setup-kit/comecar.sh | bash
+> curl -fsSL https://raw.githubusercontent.com/srkyler/cloudyx-crm/main/hostgator-setup-kit/comecar.sh | bash
 > ```
 >
 > *(¿prefieres leer antes de ejecutar? clona el repo y corre `bash hostgator-setup-kit/comecar.sh` —
@@ -68,7 +68,7 @@ presiona Enter.
 Ya dentro del VPS:
 
 ```bash
-git clone https://github.com/melgarafael/cloudyx-crm.git
+git clone https://github.com/srkyler/cloudyx-crm.git
 cd CloudyX CRM
 bash hostgator-setup-kit/install.sh
 ```
@@ -270,7 +270,7 @@ Detalles: [`ARCHITECTURE.md`](ARCHITECTURE.md).
 > Esta sección es para quien va a tocar el código.
 
 ```bash
-git clone https://github.com/melgarafael/cloudyx-crm.git
+git clone https://github.com/srkyler/cloudyx-crm.git
 cd CloudyX CRM
 
 nvm use                     # Node 22
@@ -309,7 +309,7 @@ pnpm test:e2e      # Playwright (requiere dev server)
 **Estos checks son obligatorios** para mergear en `main`. Esta lista ya dijo "cuatro" y después "cinco" — **medí, no confíes en ella**:
 
 ```bash
-gh api repos/melgarafael/cloudyx-crm/branches/main/protection \
+gh api repos/srkyler/cloudyx-crm/branches/main/protection \
   --jq '.required_status_checks.contexts|join(", ")'
 # el 2026-08-14: verify, build-and-size, invariants, e2e, imagens-ok
 ```
@@ -376,9 +376,9 @@ Dos gates obligatorios **no** entran ahí y solo corren en CI: `e2e` (necesita u
 
 ## 🐛 Reportar bugs
 
-Abre un [issue](https://github.com/melgarafael/cloudyx-crm/issues/new/choose) — la plantilla pide lo que necesitamos (entorno, `/api/v1/health`, pasos). Correr `bash hostgator-setup-kit/healthcheck.sh` y pegar la salida ayuda mucho.
+Abre un [issue](https://github.com/srkyler/cloudyx-crm/issues/new/choose) — la plantilla pide lo que necesitamos (entorno, `/api/v1/health`, pasos). Correr `bash hostgator-setup-kit/healthcheck.sh` y pegar la salida ayuda mucho.
 
-Para **vulnerabilidades de seguridad**, **NO abras un issue público** — usa el [reporte privado de vulnerabilidades](https://github.com/melgarafael/cloudyx-crm/security/advisories/new). Detalles en [`SECURITY.md`](SECURITY.md).
+Para **vulnerabilidades de seguridad**, **NO abras un issue público** — usa el [reporte privado de vulnerabilidades](https://github.com/srkyler/cloudyx-crm/security/advisories/new). Detalles en [`SECURITY.md`](SECURITY.md).
 
 ---
 
@@ -409,10 +409,10 @@ Para **vulnerabilidades de seguridad**, **NO abras un issue público** — usa e
 
 ## 💬 Comunidad
 
-- **Discusiones:** [GitHub Discussions](https://github.com/melgarafael/cloudyx-crm/discussions)
-- **Issues:** [GitHub Issues](https://github.com/melgarafael/cloudyx-crm/issues)
-- **Instagram:** [@melgarafael](https://www.instagram.com/melgarafael)
-- **YouTube:** [youtube.com/@melgarafael](https://www.youtube.com/@melgarafael)
+- **Discusiones:** [GitHub Discussions](https://github.com/srkyler/cloudyx-crm/discussions)
+- **Issues:** [GitHub Issues](https://github.com/srkyler/cloudyx-crm/issues)
+- **Instagram:** [@srkyler](https://www.instagram.com/srkyler)
+- **YouTube:** [youtube.com/@srkyler](https://www.youtube.com/@srkyler)
 
 ---
 
