@@ -126,7 +126,7 @@ Place tests in the tests/ or __tests__/ directory, mirroring src structure
 - Tests live in dedicated test folders
 
 ---
-id: cloudyxcrm-instinct-file-naming
+id: cloudyx-crm-instinct-file-naming
 trigger: "When creating a new file"
 confidence: 0.9
 domain: code-style
@@ -145,7 +145,7 @@ Name the file using snake_case
 - Pattern in namingConventions.files: snake_case
 
 ---
-id: cloudyxcrm-instinct-function-naming
+id: cloudyx-crm-instinct-function-naming
 trigger: "When defining a new function"
 confidence: 0.9
 domain: code-style
@@ -164,7 +164,7 @@ Name the function using camelCase
 - Pattern in namingConventions.functions: camelCase
 
 ---
-id: cloudyxcrm-instinct-class-naming
+id: cloudyx-crm-instinct-class-naming
 trigger: "When defining a new class"
 confidence: 0.9
 domain: code-style
@@ -183,7 +183,7 @@ Name the class using PascalCase
 - Pattern in namingConventions.classes: PascalCase
 
 ---
-id: cloudyxcrm-instinct-constant-naming
+id: cloudyx-crm-instinct-constant-naming
 trigger: "When defining a new constant"
 confidence: 0.9
 domain: code-style
@@ -202,7 +202,7 @@ Name the constant using SCREAMING_SNAKE_CASE
 - Pattern in namingConventions.constants: SCREAMING_SNAKE_CASE
 
 ---
-id: cloudyxcrm-instinct-import-style
+id: cloudyx-crm-instinct-import-style
 trigger: "When importing modules"
 confidence: 0.9
 domain: code-style
@@ -221,7 +221,7 @@ Use relative import paths
 - Pattern in importStyle: relative
 
 ---
-id: cloudyxcrm-instinct-export-style
+id: cloudyx-crm-instinct-export-style
 trigger: "When exporting modules or functions"
 confidence: 0.9
 domain: code-style
@@ -240,7 +240,7 @@ Use named exports
 - Pattern in exportStyle: named
 
 ---
-id: cloudyxcrm-instinct-git-commit-prefix
+id: cloudyx-crm-instinct-git-commit-prefix
 trigger: "When writing a commit message for a bug fix"
 confidence: 0.9
 domain: git
@@ -260,7 +260,7 @@ Prefix the commit message with 'fix' following conventional commit format
 - Seen in commit: fix(supabase): compara channel_sessions.status contra WORKING (maiúsculo)
 
 ---
-id: cloudyxcrm-instinct-git-commit-format
+id: cloudyx-crm-instinct-git-commit-format
 trigger: "When writing a commit message"
 confidence: 0.9
 domain: git
@@ -280,7 +280,7 @@ Use the conventional commit format: <type>(<scope>): <description>
 - Seen in commit: fix(supabase): compara channel_sessions.status contra WORKING (maiúsculo)
 
 ---
-id: cloudyxcrm-instinct-test-location
+id: cloudyx-crm-instinct-test-location
 trigger: "When adding or updating tests"
 confidence: 0.8
 domain: testing

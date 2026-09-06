@@ -104,7 +104,7 @@ if [ -z "${SUPABASE_ACCESS_TOKEN:-}" ]; then
   c_red "✖ Falta o token de acesso do Supabase."
   printf '\n' >&2
   c_dim "  1. Abra https://supabase.com/dashboard/account/tokens"
-  c_dim "  2. Generate new token, dê um nome (ex.: cloudyxcrm) e copie"
+  c_dim "  2. Generate new token, dê um nome (ex.: cloudyx-crm) e copie"
   c_dim "  3. Rode:  export SUPABASE_ACCESS_TOKEN=sbp_...  e tente de novo"
   printf '\n' >&2
   exit 1

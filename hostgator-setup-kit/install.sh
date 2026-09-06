@@ -19,7 +19,7 @@ REPO_URL="${REPO_URL:-https://github.com/srkyler/cloudyx-crm.git}"
 # Uma constante, dois usos (o fim feliz e o fim travado) — e o comecar.sh tem a
 # gêmea. Link repetido à mão vira link divergente na primeira troca.
 COMUNIDADE_URL="https://lp-comunidade.automatiklabs.com.br"
-REPO_DIR="${REPO_DIR:-cloudyxcrm}"
+REPO_DIR="${REPO_DIR:-cloudyx-crm}"
 COMPOSE="docker-compose.prod.yml"
 COMPOSE_TRAEFIK="docker-compose.traefik.yml"
 NONINTERACTIVE=0
@@ -600,7 +600,7 @@ decide_proxy() {  # decide_proxy <portas_ocupadas> <projeto_do_dono> <projeto_at
   # Só que "mesma instalação" NÃO é o mesmo que "mesmo nome de projeto": o nome
   # é o basename da pasta, e toda cópia do repo se chama CloudyX CRM. Duas
   # árvores irmãs (/root/CloudyXCRM e /root/apagar7/CloudyXCRM) colidem no
-  # nome `cloudyxcrm` e esta linha as declarava re-execução uma da outra —
+  # nome `cloudyx-crm` e esta linha as declarava re-execução uma da outra —
   # exatamente o caso que a varredura de portas foi escrita para pegar. Medido
   # numa VPS de produção em 2026-08-24: a instalação de uma aula passou por
   # aqui, recriou os contêineres do CRM no ar com o .env dela e trocou o banco
@@ -1164,8 +1164,8 @@ fi
 VERSAO_ALVO="$(ultima_versao_publicada "$REPO_URL")"
 
 # A tag do git é condição NECESSÁRIA, não suficiente: ela nasce minutos antes
-# das imagens, e `cloudyx-worker`/`cloudyx-scheduler` só passaram a existir
-# depois das releases que já estão publicadas — `cloudyx-worker:1.2.1` nunca
+# das imagens, e `cloudyx-crm-worker`/`cloudyx-crm-scheduler` só passaram a existir
+# depois das releases que já estão publicadas — `cloudyx-crm-worker:1.2.1` nunca
 # vai existir, porque a v1.2.1 é passado. Sem esta conferência, o .env do
 # cliente receberia duas referências impossíveis e o kit as construiria aqui em
 # silêncio, do topo da main: app de uma release + worker de outro código.
@@ -1465,7 +1465,7 @@ _ref_final="${APP_IMAGE##*/}"
 case "$_ref_final" in
   *@sha256:*)
     # O operador pinou o app por DIGEST. Derivar a tag daí produziria
-    # `cloudyx-worker:<hash-do-app>` — uma referência que não existe em lugar
+    # `cloudyx-crm-worker:<hash-do-app>` — uma referência que não existe em lugar
     # nenhum, e o `pull` falharia com "manifest unknown" sem ninguém entender
     # por quê. Worker e scheduler vão para o canal estável, e o aviso sai porque
     # quem pinou por digest tinha um motivo e precisa saber que ele não se

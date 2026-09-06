@@ -42,9 +42,9 @@ ghcr_status() {   # $1=imagem  $2=tag  → 200 existe | 404 não existe | 403 pr
 Estado no momento em que este runbook foi escrito (2026-08-13):
 
 ```console
-$ ghcr_status cloudyxcrm 1.2.1        → 200
-$ ghcr_status cloudyxcrm stable       → 404   (o canal ainda não existe)
-$ ghcr_status cloudyx-worker latest   → 403   (o pacote ainda não existe)
+$ ghcr_status cloudyx-crm 1.2.1        → 200
+$ ghcr_status cloudyx-crm stable       → 404   (o canal ainda não existe)
+$ ghcr_status cloudyx-crm-worker latest   → 403   (o pacote ainda não existe)
 ```
 
 ---
@@ -52,13 +52,13 @@ $ ghcr_status cloudyx-worker latest   → 403   (o pacote ainda não existe)
 ## 1. Merge do PR na `main`
 
 O push na `main` dispara `publish-image.yml`, que **cria** os dois pacotes novos
-(`cloudyx-worker`, `cloudyx-scheduler`) publicando `main` e `latest` neles.
+(`cloudyx-crm-worker`, `cloudyx-crm-scheduler`) publicando `main` e `latest` neles.
 
 **Verificação:**
 
 ```bash
 gh run list --workflow=publish-image.yml --limit 3    # o run da main ficou verde?
-ghcr_status cloudyx-worker latest                    # esperado agora: 403 (existe, privado)
+ghcr_status cloudyx-crm-worker latest                    # esperado agora: 403 (existe, privado)
 ```
 
 `403` aqui é **progresso**, não erro: significa que o pacote passou a existir. `404` significa
@@ -71,7 +71,7 @@ no GHCR nasce privado, e repositório público não muda isso. Enquanto for priv
 `docker compose pull` de **toda VPS** é negado — e como `pull` de um serviço com `image:` falha
 a operação inteira, a atualização de um cliente morre depois do `git checkout` e do banco.
 
-Para cada um de `cloudyx-worker` e `cloudyx-scheduler`:
+Para cada um de `cloudyx-crm-worker` e `cloudyx-crm-scheduler`:
 
 > github.com/users/srkyler/packages/container/`<pacote>`/settings → Danger Zone →
 > Change visibility → **Public**
@@ -82,7 +82,7 @@ permissão do repositório em vez de uma lista própria.
 **Verificação:**
 
 ```bash
-for i in cloudyxcrm cloudyx-worker cloudyx-scheduler; do
+for i in cloudyx-crm cloudyx-crm-worker cloudyx-crm-scheduler; do
   echo "$i: $(ghcr_status $i latest)"
 done
 # esperado: 200 nos três
@@ -104,7 +104,7 @@ gh api -X PATCH repos/srkyler/cloudyx-crm/branches/main/protection/required_stat
 ```
 
 > Use **`imagens-ok`**, não `build-and-push`. O job de build virou matriz de três imagens, e o
-> nome do check passou a ser `build-and-push (cloudyxcrm, …)` — exigir cada um pelo nome faria
+> nome do check passou a ser `build-and-push (cloudyx-crm, …)` — exigir cada um pelo nome faria
 > uma quarta imagem, um dia, escapar do gate em silêncio. `imagens-ok` é o job de fachada que
 > existe exatamente para dar um nome estável.
 
@@ -131,12 +131,12 @@ não sobe. Siga o §Checklist de release da doutrina.
 **Verificação:**
 
 ```bash
-for i in cloudyxcrm cloudyx-worker cloudyx-scheduler; do
+for i in cloudyx-crm cloudyx-crm-worker cloudyx-crm-scheduler; do
   echo "$i X.Y.Z: $(ghcr_status $i X.Y.Z)  stable: $(ghcr_status $i stable)"
 done
 # esperado: 200 em todos
 
-docker run --rm ghcr.io/srkyler/cloudyxcrm:X.Y.Z \
+docker run --rm ghcr.io/srkyler/cloudyx-crm:X.Y.Z \
   node -e 'console.log(process.env.APP_VERSION)'
 # esperado: X.Y.Z   (antes desta release, `undefined` — nenhuma imagem publicada a carrega)
 ```

@@ -29,8 +29,8 @@ uma instalação DeskcommCRM existente precisa saber de quatro coisas:
    é perdido.
 
 2. **As imagens Docker mudaram de nome.** `deskcommcrm`, `deskcomm-worker` e
-   `deskcomm-scheduler` viraram `cloudyxcrm`, `cloudyx-worker` e
-   `cloudyx-scheduler`. Se o seu `.env` tem `APP_IMAGE`, `WORKER_IMAGE` ou
+   `deskcomm-scheduler` viraram `cloudyx-crm`, `cloudyx-crm-worker` e
+   `cloudyx-crm-scheduler`. Se o seu `.env` tem `APP_IMAGE`, `WORKER_IMAGE` ou
    `SCHEDULER_IMAGE` fixados à mão, atualize as três — e as três juntas, nunca
    pela metade.
 

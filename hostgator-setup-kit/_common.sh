@@ -57,7 +57,7 @@ nome_do_projeto_atual() {
 # Duas cópias do repo na mesma VPS — o clone de produção e um de teste ao lado —
 # recebem o MESMO nome de projeto compose: o docker o deriva do basename do
 # diretório, e `/root/CloudyXCRM` e `/root/apagar6/CloudyXCRM` dão os dois
-# `cloudyxcrm`. Os contêineres são UM conjunto só; os `.env` são dois. Cada
+# `cloudyx-crm`. Os contêineres são UM conjunto só; os `.env` são dois. Cada
 # `up -d` recria o parque com as credenciais da SUA árvore, e a outra fica
 # falando com um transporte que não a reconhece mais.
 #
@@ -378,7 +378,7 @@ load_env() {
 # Vai pro diretório do projeto (onde está o compose) e carrega o .env.
 enter_project() {
   if [ -f "$COMPOSE" ]; then :;
-  elif [ -f "cloudyxcrm/$COMPOSE" ]; then cd cloudyxcrm;
+  elif [ -f "cloudyx-crm/$COMPOSE" ]; then cd cloudyx-crm;
   else die "Não achei $COMPOSE. Rode a partir da pasta do projeto."; fi
   [ -f .env ] || die "Falta o .env (rode install.sh primeiro)."
   load_env .env
@@ -434,9 +434,9 @@ psql_run() { docker run --rm -i postgres:17-alpine psql "$(url_do_schema)" -v ON
 # `publish-image.yml` digam o mesmo. Se você é um fork, é lá que está a lista do
 # que trocar junto.
 IMG_NS="ghcr.io/srkyler"
-IMG_APP="${IMG_NS}/cloudyxcrm"
-IMG_WORKER="${IMG_NS}/cloudyx-worker"
-IMG_SCHEDULER="${IMG_NS}/cloudyx-scheduler"
+IMG_APP="${IMG_NS}/cloudyx-crm"
+IMG_WORKER="${IMG_NS}/cloudyx-crm-worker"
+IMG_SCHEDULER="${IMG_NS}/cloudyx-crm-scheduler"
 
 # A última versão publicada (ex.: "1.2.1"), ou vazio se não deu para saber.
 #
@@ -483,16 +483,16 @@ ghcr_status() {
 
 # As TRÊS imagens existem e são públicas nesta referência?
 #
-# Perguntar pelas três juntas, e não só pela do app, é o ponto: `cloudyx-worker`
-# e `cloudyx-scheduler` nasceram depois das releases que já existem, então
-# `cloudyx-worker:1.2.1` nunca vai existir — a v1.2.1 é passado. Pinar as três
+# Perguntar pelas três juntas, e não só pela do app, é o ponto: `cloudyx-crm-worker`
+# e `cloudyx-crm-scheduler` nasceram depois das releases que já existem, então
+# `cloudyx-crm-worker:1.2.1` nunca vai existir — a v1.2.1 é passado. Pinar as três
 # numa versão sem conferir gravaria no .env do cliente duas referências
 # impossíveis, e o kit as construiria na VPS **em silêncio**, do topo da main:
 # app de uma release + worker/scheduler de outro código. Exatamente a mistura de
 # versões que a doutrina existe para proibir, no caminho de primeira impressão.
 trio_publicado() {
   local tag="$1" i
-  for i in cloudyxcrm cloudyx-worker cloudyx-scheduler; do
+  for i in cloudyx-crm cloudyx-crm-worker cloudyx-crm-scheduler; do
     [ "$(ghcr_status "$i" "$tag")" = "200" ] || return 1
   done
   return 0
@@ -574,7 +574,7 @@ completar_pin_ausente() {  # completar_pin_ausente [envfile]
   # e o `.env` original chega intacto do outro lado, com as customizações.
   [ -w "$envfile" ] || return 0
 
-  for par in "WORKER_IMAGE:worker:cloudyx-worker" "SCHEDULER_IMAGE:scheduler:cloudyx-scheduler"; do
+  for par in "WORKER_IMAGE:worker:cloudyx-crm-worker" "SCHEDULER_IMAGE:scheduler:cloudyx-crm-scheduler"; do
     chave="${par%%:*}"; svc="$(printf '%s' "$par" | cut -d: -f2)"; repo="${par##*:}"
 
     # LACUNA apenas. Valor explícito (mesmo em canal móvel) é intocável.
@@ -775,7 +775,7 @@ setup_update_agent_cron() {
 
   # `cd` explícito: o agent.sh chama enter_project(), que acha o projeto pelo
   # DIRETÓRIO CORRENTE. No cron o CWD é o home do dono do crontab — sem o cd,
-  # a linha só funciona por acidente (instalação padrão em /root/cloudyxcrm) e
+  # a linha só funciona por acidente (instalação padrão em /root/cloudyx-crm) e
   # morre calada a cada 5 minutos em qualquer REPO_DIR customizado ou /opt.
   # A assinatura legada inclui o PROJECT_DIR: é o que distingue a linha desta
   # instalação da linha de uma vizinha, que roda o mesmo agent.sh em outra pasta.

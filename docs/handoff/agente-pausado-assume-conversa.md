@@ -4,7 +4,7 @@
 
 ## Relato do dono (2026-08-28)
 
-Na VPS (`ssh hg-vps`, `cloudyxcrm-app-1` @ `1.9.1`):
+Na VPS (`ssh hg-vps`, `cloudyx-crm-app-1` @ `1.9.1`):
 
 - O agente **publicado** é o **Suporte CloudyX**.
 - Quem **pega as conversas para atender** é o **Atendente Clínica Vitalis**, que está **PAUSADO**.
@@ -464,7 +464,7 @@ imagem **por número de versão**:
 
 ```
 git tag -l 'v*' --sort=-v:refname | head -1      # o alvo do update.sh
-APP_IMAGE=ghcr.io/srkyler/cloudyxcrm:1.9.1  # o que está lá hoje
+APP_IMAGE=ghcr.io/srkyler/cloudyx-crm:1.9.1  # o que está lá hoje
 ```
 
 Então merge do #408 **não basta**. A sequência é:

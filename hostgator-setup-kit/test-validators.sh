@@ -1092,24 +1092,24 @@ dec_ok "Caddy de OUTRO CloudyX → bloqueia" bloqueia "80 e 443" "outro"     "cr
 # projeto do compose é o basename da pasta, e toda cópia do repo se chama
 # CloudyX CRM. Medido numa VPS de produção em 2026-08-24: a instalação de uma
 # aula em /root/apagar7/CloudyXCRM viu o Caddy da produção em
-# /root/CloudyXCRM com o MESMO projeto `cloudyxcrm`, concluiu "é a
+# /root/CloudyXCRM com o MESMO projeto `cloudyx-crm`, concluiu "é a
 # re-execução" e subiu por cima — trocando o banco do CRM no ar sem um aviso.
 # Quem distingue as duas é a ÁRVORE (label com.docker.compose.project.working_dir),
 # não o nome.
 dec_ok "cópia irmã: mesmo projeto, OUTRA árvore → bloqueia" \
-  bloqueia "80 e 443" "cloudyxcrm" "cloudyxcrm" "caddy:2-alpine" "cloudyxcrm-caddy-1" \
+  bloqueia "80 e 443" "cloudyx-crm" "cloudyx-crm" "caddy:2-alpine" "cloudyx-crm-caddy-1" \
   "/root/CloudyXCRM" "/root/apagar7/CloudyXCRM"
 # O outro lado da mesma moeda: re-execução DE VERDADE é mesma árvore, e tem de
 # seguir passando (é o caminho que o kit manda usar para corrigir uma resposta).
 dec_ok "re-execução real: mesmo projeto, MESMA árvore → segue" \
-  caddy "80 e 443" "cloudyxcrm" "cloudyxcrm" "caddy:2-alpine" "cloudyxcrm-caddy-1" \
+  caddy "80 e 443" "cloudyx-crm" "cloudyx-crm" "caddy:2-alpine" "cloudyx-crm-caddy-1" \
   "/root/CloudyXCRM" "/root/CloudyXCRM"
 # Contêiner sem o label de árvore (não foi o compose que criou, ou é antigo):
 # não dá para afirmar que é cópia irmã, e fechar aqui quebraria re-execução
 # legítima. Mantém o comportamento anterior — a varredura de portas continua
 # sendo a rede que pega o resto.
 dec_ok "sem árvore conhecida: mantém o comportamento anterior" \
-  caddy "80 e 443" "cloudyxcrm" "cloudyxcrm" "caddy:2-alpine" "cloudyxcrm-caddy-1" \
+  caddy "80 e 443" "cloudyx-crm" "cloudyx-crm" "caddy:2-alpine" "cloudyx-crm-caddy-1" \
   "" "/root/apagar7/CloudyXCRM"
 dec_ok "Traefik da hospedagem → por ele"    traefik  "80 e 443" "coolify"   "crm" "traefik:v3.3"   "coolify-proxy"
 dec_ok "ocupante não identificado → bloqueia" bloqueia "80"     ""          "crm" ""              ""
@@ -1561,7 +1561,7 @@ STUB
   # sobrevive aos dois caminhos, com rede e sem.
   img_app="$(valor_no_env "$VPS_PROJ/.env" APP_IMAGE)"
   tag_app="${img_app##*:}"
-  for par in "WORKER_IMAGE:cloudyx-worker" "SCHEDULER_IMAGE:cloudyx-scheduler"; do
+  for par in "WORKER_IMAGE:cloudyx-crm-worker" "SCHEDULER_IMAGE:cloudyx-crm-scheduler"; do
     chave="${par%%:*}"; repo="${par##*:}"
     if [ "$(valor_no_env "$VPS_PROJ/.env" "$chave")" != "${IMG_NS}/${repo}:${tag_app}" ]; then
       printf '  ✗ %s não acompanha a versão do app (%s): %s\n' "$chave" "$tag_app" \
@@ -1745,7 +1745,7 @@ STUB
   rodar install.sh --yes >/dev/null
   unset REPO_URL
 
-  for par in "APP_IMAGE:cloudyxcrm" "WORKER_IMAGE:cloudyx-worker" "SCHEDULER_IMAGE:cloudyx-scheduler"; do
+  for par in "APP_IMAGE:cloudyx-crm" "WORKER_IMAGE:cloudyx-crm-worker" "SCHEDULER_IMAGE:cloudyx-crm-scheduler"; do
     chave="${par%%:*}"; repo="${par##*:}"
     if [ "$(valor_no_env "$VPS_PROJ/.env" "$chave")" != "${IMG_NS}/${repo}:1.10.0" ]; then
       printf '  ✗ %s não foi pinado na versão resolvida (1.10.0): %s\n' "$chave" \
@@ -1763,7 +1763,7 @@ rm -rf "$TMP_PIN"
 
 echo "packaging: a tag do git não basta — as imagens têm de existir"
 # A tag nasce minutos antes das imagens, e as do worker/scheduler só passaram a
-# existir depois das releases que já estão publicadas: `cloudyx-worker:1.2.1`
+# existir depois das releases que já estão publicadas: `cloudyx-crm-worker:1.2.1`
 # nunca vai existir, porque a v1.2.1 é passado. Sem sondar o registry, o .env do
 # cliente receberia referências impossíveis e o kit as construiria aqui EM
 # SILÊNCIO, do topo da main — app de uma release, worker de outro código.
@@ -1997,12 +1997,18 @@ echo "integração: instalar de uma CÓPIA IRMÃ, com o CRM já no ar (2026-08-2
 # teste só da função fica verde enquanto o produto instala por cima da produção.
 #
 # A VPS deste teste é a que aconteceu de verdade: um CloudyX CRM no ar em
-# /root/CloudyXCRM (Caddy publicando 80/443, projeto `cloudyxcrm`), e o
-# instalador rodando de OUTRA cópia — cuja pasta também se chama CloudyX CRM,
+# /root/cloudyx-crm (Caddy publicando 80/443, projeto `cloudyx-crm`), e o
+# instalador rodando de OUTRA cópia — cuja pasta também se chama `cloudyx-crm`,
 # então o projeto colide e a versão anterior dizia "é a re-execução, siga".
+#
+# ⚠️ O NOME DA PASTA AQUI É LOAD-BEARING, e não decoração do cenário: o nome do
+# projeto do compose É o basename dela. Se ele deixar de bater com o projeto que
+# o dublê de `docker ps` reporta na linha do Caddy (`cloudyx-crm`), não há
+# colisão nenhuma para detectar — o instalador segue em frente com razão, e este
+# caso passa a medir o nada enquanto parece continuar vigiando.
 TMP_IRMA="$(mktemp -d)"
 (
-  montar_vps "$TMP_IRMA" "CloudyX CRM" <<'STUB'
+  montar_vps "$TMP_IRMA" "cloudyx-crm" <<'STUB'
 #!/usr/bin/env bash
 printf '%s\n' "$*" >> "$DOCKER_LOG"
 case "$1" in
@@ -2012,7 +2018,7 @@ case "$1" in
   # O Caddy da instalação que está NO AR, com o MESMO nome de projeto.
   ps)      for a in "$@"; do [ "$a" = "network=host" ] && em_host=1; done
            [ "${em_host:-0}" = 1 ] && exit 0
-           printf 'cloudyxcrm-caddy-1|cloudyxcrm|caddy:2-alpine|0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp\n'
+           printf 'cloudyx-crm-caddy-1|cloudyx-crm|caddy:2-alpine|0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp\n'
            exit 0 ;;
   # A árvore que pariu aquele contêiner — o dado que separa irmã de re-execução.
   inspect) case "$*" in *working_dir*) printf '/root/CloudyXCRM\n' ;; esac; exit 0 ;;
@@ -2058,7 +2064,7 @@ case "\$1" in
   run)     case "\$*" in *--entrypoint*) exit 1 ;; esac; exit 0 ;;
   ps)      for a in "\$@"; do [ "\$a" = "network=host" ] && em_host=1; done
            [ "\${em_host:-0}" = 1 ] && exit 0
-           printf 'cloudyxcrm-caddy-1|cloudyxcrm|caddy:2-alpine|0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp\n'
+           printf 'cloudyx-crm-caddy-1|cloudyx-crm|caddy:2-alpine|0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp\n'
            exit 0 ;;
   inspect) case "\$*" in *working_dir*) printf '%s\n' "$VPS_PROJ" ;; esac; exit 0 ;;
   network) case "\$2" in inspect) exit 1 ;; esac; exit 0 ;;
@@ -2430,7 +2436,11 @@ np_ok() {  # np_ok <caminho> <esperado>
   if [ "$real" = "$2" ]; then printf '  ✓ %s → %s\n' "$1" "$real"
   else printf '  ✗ %s → deu [%s], esperava [%s]\n' "$1" "$real" "$2"; fail=1; fi
 }
-np_ok /root/cloudyxcrm  cloudyxcrm
+np_ok /root/cloudyx-crm  cloudyx-crm
+# Caixa alta e ponto: o compose so LOWERCASEIA e descarta o que nao serve —
+# ele nao inventa hifen. Os dois caem em `cloudyxcrm`, sem hifen, e e por isso
+# que a pasta padrao da instalacao se chama `cloudyx-crm`: assim o nome do
+# projeto sai igual ao do repositorio em vez de depender desta normalizacao.
 np_ok /root/CloudyXCRM  cloudyxcrm
 np_ok /root/_cloudyx    cloudyx
 np_ok /root/-cloudyx    cloudyx
@@ -2451,7 +2461,7 @@ echo "re-execução: o kit é chamado por caminho RELATIVO, como o README manda"
 # leitura do próprio script), que é o que regride em silêncio.
 reexec_ok() {
   local desc="$1" dir raiz achou linha
-  raiz="$(mktemp -d)"; dir="$raiz/cloudyxcrm"; mkdir -p "$dir"
+  raiz="$(mktemp -d)"; dir="$raiz/cloudyx-crm"; mkdir -p "$dir"
   cp ./install.sh "$raiz/install.sh"
   # A LINHA REAL do install.sh, extraída do arquivo — não uma reimplementação.
   # Reimplementar o mecanismo aqui deixaria este caso VERDE com o install.sh
@@ -2484,7 +2494,7 @@ reexec_ok() {
 # decorativo.
 reexec_neg() {
   local dir raiz linha achou
-  raiz="$(mktemp -d)"; dir="$raiz/cloudyxcrm"; mkdir -p "$dir"
+  raiz="$(mktemp -d)"; dir="$raiz/cloudyx-crm"; mkdir -p "$dir"
   cp ./install.sh "$raiz/install.sh"
   linha="$(grep -n 'CONHECIDAS=' "$raiz/install.sh" | head -1 | cut -d: -f2-)"
   if [ -z "$linha" ]; then

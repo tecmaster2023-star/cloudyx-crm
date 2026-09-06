@@ -29,12 +29,12 @@ services:
     build:
       args:
         APP_VERSION: ${APP_VERSION:-local}
-    image: ${WORKER_IMAGE:-cloudyx-worker:local}
+    image: ${WORKER_IMAGE:-cloudyx-crm-worker:local}
     pull_policy: never
 
   scheduler:
     build:
       args:
         APP_VERSION: ${APP_VERSION:-local}
-    image: ${SCHEDULER_IMAGE:-cloudyx-scheduler:local}
+    image: ${SCHEDULER_IMAGE:-cloudyx-crm-scheduler:local}
     pull_policy: never

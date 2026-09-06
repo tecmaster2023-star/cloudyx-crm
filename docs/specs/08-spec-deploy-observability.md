@@ -188,8 +188,8 @@ Linux/WSL: equivalentes via `apt` ou Docker oficial. Windows nativo não é supo
 
 ### 3.2 Clone + install + .env.local
 ```bash
-git clone git@github.com:cloudyx/cloudyxcrm.git
-cd cloudyxcrm
+git clone git@github.com:cloudyx/cloudyx-crm.git
+cd cloudyx-crm
 pnpm install                  # instala root + workspaces (app, mcp futuro)
 cp .env.example .env.local    # template versionado; .env.local é gitignored
 ```

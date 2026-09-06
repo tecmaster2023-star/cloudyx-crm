@@ -57,9 +57,9 @@ sozinho, e o namespace antigo mantido até o parque ter migrado — nunca um cor
 
 | Package | Pergunta | Status |
 |---|---|---|
-| `cloudyxcrm` | "o que a pessoa instala?" | existe desde 2026-07-02 |
-| `cloudyx-worker` | "o que roda 24/7 fora do request?" | **criado aqui** |
-| `cloudyx-scheduler` | "o que dispara os crons?" | **criado aqui** |
+| `cloudyx-crm` | "o que a pessoa instala?" | existe desde 2026-07-02 |
+| `cloudyx-crm-worker` | "o que roda 24/7 fora do request?" | **criado aqui** |
+| `cloudyx-crm-scheduler` | "o que dispara os crons?" | **criado aqui** |
 
 Os três passam no teste de fronteira: consumidor distinto (contêiner próprio), topologia de
 execução própria (long-running, cron, request/response), e custo de build que hoje cai no
@@ -67,7 +67,7 @@ cliente. O ciclo de release é **acoplado** — os três sobem juntos, com a mes
 compartilham o mesmo repositório e a mesma migração de banco; versioná-los independentemente
 criaria matriz de compatibilidade sem consumidor para ela.
 
-### D3 — `cloudyx-worker` é publicado, não fundido na imagem do app
+### D3 — `cloudyx-crm-worker` é publicado, não fundido na imagem do app
 
 O worker roda TypeScript direto via `tsx` (`workers/agent-worker/main.ts`), enquanto a imagem
 do app é um `.next/standalone` — que não contém `tsx` nem o fonte TS.
@@ -142,7 +142,7 @@ porque um diagnóstico errado que sobrevive vira premissa de decisões futuras.
 | Alegação | O que a medição mostrou |
 |---|---|
 | "o `Packages` do repo está vazio" | 10 tags publicadas e públicas; `tags/list` anônimo responde, manifest de `latest` = 200. Provável causa do erro: `gh api users/…/packages` devolve **403** sem escopo `read:packages` — instrumento cego lido como ausência |
-| "o compose aponta para `ghcr.io/cloudyxcrm/cloudyxcrm`" | aponta para `ghcr.io/srkyler/cloudyxcrm`. A org `cloudyxcrm` não existe (404). A string aparecia num `git clone` de `docs/deploy-selfhost/README.md` — link quebrado, corrigido aqui |
+| "o compose aponta para `ghcr.io/cloudyx-crm/cloudyx-crm`" | aponta para `ghcr.io/srkyler/cloudyx-crm`. A org `cloudyx-crm` não existe (404). A string aparecia num `git clone` de `docs/deploy-selfhost/README.md` — link quebrado, corrigido aqui |
 | "não há workflow de publish" | existe desde 2026-07-02; 258 runs, 252 verdes |
 | "falta `LABEL` OCI, o package fica órfão" | premissa certa, consequência errada: o `metadata-action` injeta os labels no push, e a imagem publicada traz `image.source` correto. O package está vinculado ao repo |
 | "instalação exige 4 GB e 4–34 min de build" | o app não builda: `install.sh` faz `dc pull`. Os 4 GB são de operação. "4–34 min" não existe no repo |

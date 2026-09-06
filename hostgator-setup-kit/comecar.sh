@@ -145,8 +145,8 @@ comando_de_instalacao() {
 
   Já dentro do servidor, cole isto:
 
-       git clone ${REPO_URL} cloudyxcrm
-       cd cloudyxcrm
+       git clone ${REPO_URL} cloudyx-crm
+       cd cloudyx-crm
        bash hostgator-setup-kit/install.sh
 
   O instalador cuida do resto: instala o Docker se faltar, cria o banco,

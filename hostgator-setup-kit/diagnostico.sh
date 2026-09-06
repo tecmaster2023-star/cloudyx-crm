@@ -38,12 +38,12 @@ titulo() { printf '\n%s%s%s\n' "$B" "$*" "$Z"; }
 item()   { printf '  %s\n' "$*"; }
 
 # ── 0. Achar a instalação ────────────────────────────────────────────────────
-# O install.sh clona em ./cloudyxcrm por padrão, mas o operador pode ter posto
+# O install.sh clona em ./cloudyx-crm por padrão, mas o operador pode ter posto
 # em qualquer lugar. Procuramos no cwd, no caminho padrão, e por último varremos
 # — em profundidade limitada, para não passear pelo disco inteiro.
 achar_projeto() {
   local c
-  for c in . ./cloudyxcrm /root/CloudyXCRM /root/cloudyxcrm /opt/cloudyxcrm /var/www/crm; do
+  for c in . ./cloudyx-crm /root/CloudyXCRM /root/cloudyx-crm /opt/cloudyx-crm /var/www/crm; do
     [ -f "$c/$COMPOSE_FILE" ] && { (cd "$c" && pwd); return 0; }
   done
   c="$(find /root /opt /home /var/www -maxdepth 4 -name "$COMPOSE_FILE" 2>/dev/null | head -1)"
@@ -110,7 +110,7 @@ IMG_APP="$(imagem_do_servico app)"
 #     A primeira versão deste detector decidia pelo NOME da imagem ("tem host,
 #     logo veio de registro") e só consultava os labels quando o nome não tinha
 #     host. Uma sabotagem derrubou isso em um comando: construí local, taguei
-#     como `<namespace>/cloudyx-worker:falsificado`, e o diagnóstico
+#     como `<namespace>/cloudyx-crm-worker:falsificado`, e o diagnóstico
 #     deu "NÃO afetada" numa instalação afetada. Pior: o comentário ao lado do
 #     código afirmava que os labels pegariam esse caso — a prosa descrevia uma
 #     proteção que o código não implementava.

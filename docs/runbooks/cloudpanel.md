@@ -84,18 +84,18 @@ E **descomente estas duas** (elas já vêm no arquivo de exemplo, comentadas):
 
 ```dotenv
 REVERSE_PROXY=traefik
-TRAEFIK_NETWORK=cloudyxcrm_proxy
+TRAEFIK_NETWORK=cloudyx-crm_proxy
 ```
 
-`cloudyxcrm_proxy` não é um nome livre: é `<nome do projeto compose>_proxy`, e
+`cloudyx-crm_proxy` não é um nome livre: é `<nome do projeto compose>_proxy`, e
 o nome do projeto é o da pasta em minúsculas. Clonando em `/var/www/CloudyX CRM`
-como acima, é `cloudyxcrm` — logo, `cloudyxcrm_proxy`. Clonou em outra pasta?
+como acima, é `cloudyx-crm` — logo, `cloudyx-crm_proxy`. Clonou em outra pasta?
 Rode `basename "$PWD" | tr '[:upper:]' '[:lower:]'` e acrescente `_proxy`.
 
 > **Por que a segunda linha é obrigatória.** Com `REVERSE_PROXY=traefik` o
 > instalador tenta descobrir a rede sozinho procurando um contêiner Traefik. Aqui
 > não há nenhum — ele não acha, e para pedindo justamente esta variável. Dizer o
-> nome de antemão evita a viagem: `cloudyxcrm_proxy` é o nome que o próprio kit
+> nome de antemão evita a viagem: `cloudyx-crm_proxy` é o nome que o próprio kit
 > reserva para este projeto, e ele **cria a rede** quando ela não existe.
 
 ---
@@ -108,7 +108,7 @@ bash hostgator-setup-kit/install.sh --yes
 ```
 
 Com a linha do proxy externo no lugar, o instalador vai até o fim: gera os
-segredos, escreve o `.env`, cria a rede `cloudyxcrm_proxy`, aplica o schema,
+segredos, escreve o `.env`, cria a rede `cloudyx-crm_proxy`, aplica o schema,
 cria o primeiro admin e sobe os containers — **sem** Caddy e **sem** tocar nas
 portas 80/443.
 
@@ -141,7 +141,7 @@ repassa para o contêiner **resolvendo o nome a cada conexão**:
 
 ```bash
 docker run -d --name cloudyx-nginx-bridge --restart unless-stopped \
-  --network cloudyxcrm_proxy -p 127.0.0.1:3000:3000 \
+  --network cloudyx-crm_proxy -p 127.0.0.1:3000:3000 \
   alpine/socat tcp-listen:3000,fork,reuseaddr tcp-connect:app:3000
 ```
 
@@ -307,8 +307,8 @@ aponta para `127.0.0.1:3000`, o IP novo do contêiner recriado não quebra nada.
 | Sintoma | Causa | O que fazer |
 |---|---|---|
 | Instalador para na varredura de portas | falta `REVERSE_PROXY=traefik` no `.env` | Passo 1 — e rode o instalador de novo do zero |
-| *"Não consegui descobrir a rede Docker do seu Traefik"* | `REVERSE_PROXY=traefik` sem `TRAEFIK_NETWORK` | acrescente `TRAEFIK_NETWORK=cloudyxcrm_proxy` |
-| *"network cloudyxcrm_proxy declared as external, but could not be found"* | a rede sumiu (`docker network prune`) | `docker network create cloudyxcrm_proxy` |
+| *"Não consegui descobrir a rede Docker do seu Traefik"* | `REVERSE_PROXY=traefik` sem `TRAEFIK_NETWORK` | acrescente `TRAEFIK_NETWORK=cloudyx-crm_proxy` |
+| *"network cloudyx-crm_proxy declared as external, but could not be found"* | a rede sumiu (`docker network prune`) | `docker network create cloudyx-crm_proxy` |
 | Schema trava sem output por minutos | latência com o Supabase | aguarde 5 min; confira as tabelas no dashboard |
 | Let's Encrypt falha na validação | DNS ainda não propagou | aguarde 1–2 min e tente de novo |
 | `502` no navegador | a ponte caiu | `docker start cloudyx-nginx-bridge` e veja `docker logs` |

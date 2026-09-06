@@ -9,7 +9,7 @@
 #
 # `/root/CloudyXCRM` e `/root/apagar6/CloudyXCRM` — o clone de produção e um
 # de teste ao lado — têm o mesmo basename, logo o mesmo nome de projeto compose
-# (`cloudyxcrm`). O cron rodava o agent.sh das DUAS a cada 5 minutos. Em
+# (`cloudyx-crm`). O cron rodava o agent.sh das DUAS a cada 5 minutos. Em
 # 21/08 13:30 o clone de teste recriou o contêiner do WhatsApp com a chave do
 # .env dele; às 14:47 o app foi recriado da árvore de produção, com outra chave.
 # Resultado: `waha_create_401` em toda chamada, por três dias, nenhum número
