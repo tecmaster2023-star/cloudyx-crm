@@ -79,7 +79,7 @@ describe("a tag nasce no CI, e nunca do GITHUB_TOKEN", () => {
     // não o nome da função — que já mudou uma vez, quando a conferência passou a
     // comparar digest em vez de código de status (issue #488).
     expect(t, "o corte não consulta mais o registro").toMatch(/ghcr\.io\/v2\//);
-    for (const img of ["deskcommcrm", "deskcomm-worker", "deskcomm-scheduler"]) {
+    for (const img of ["cloudyxcrm", "cloudyx-worker", "cloudyx-scheduler"]) {
       expect(t, `a conferência não cobre ${img}`).toContain(img);
     }
     expect(t).toMatch(/::error::/);
@@ -102,7 +102,11 @@ describe("a tag nasce no CI, e nunca do GITHUB_TOKEN", () => {
     // O ramo que RECUSA precisa existir: zero removidos não é corte.
     expect(t).toMatch(/removidos[^\n]*-eq 0/);
     // E a condição que a guarda antiga NÃO tinha: só o App da release corta.
-    expect(t).toMatch(/deskcomm-release\[bot\]/);
+    // A identidade do bot de release é do FORK: o workflow só aceita corte
+    // assinado por ela. Enquanto a conta correspondente não existir no GitHub, o
+    // corte automático não roda — e não rodar é o comportamento seguro, porque o
+    // que este caso protege é uma tag NÃO nascer de um push humano.
+    expect(t).toMatch(/cloudyx-release\[bot\]/);
   });
 
   it("a tag só é criada em push na main, nunca num dispatch de branch qualquer", () => {

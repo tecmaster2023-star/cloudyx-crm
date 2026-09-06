@@ -315,7 +315,7 @@ export async function apagarNoGoogle(
  *
  * ⚠️ SUBSTITUI `ehIcalUidNosso`, e a troca não é cosmética.
  *
- * O reconhecimento morava no sufixo `@deskcomm.app` do `iCalUID` que mandávamos
+ * O reconhecimento morava no sufixo `@cloudyx.app` do `iCalUID` que mandávamos
  * junto do evento. Só que mandar `iCalUID` e `id` juntos é o que o Google
  * recusava com `400 Invalid resource id value` — medido em produção em
  * 2026-09-01, a cada 5 minutos, por horas. Tirar o uid conserta a publicação e

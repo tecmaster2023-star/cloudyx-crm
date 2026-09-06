@@ -103,7 +103,7 @@ Gates da `main`: `typecheck`, `lint`, `lint:channels`, `test:unit`, `test:shell`
 Obrigatórios no merge — **cinco**, e não confie nesta lista: meça.
 
 ```bash
-gh api repos/melgarafael/DeskcommCRM/branches/main/protection \
+gh api repos/melgarafael/cloudyx-crm/branches/main/protection \
   --jq '.required_status_checks.contexts|join(", ")'
 # em 2026-08-14: verify, build-and-size, invariants, e2e, imagens-ok
 ```
@@ -283,7 +283,7 @@ troca errada — e ele nem tem como ver a nossa fila. O `CLAUDE.md` manda "veja 
 `ls supabase/migrations/`", ele leu, e acertou contra a `main`. **O que ele não pode ver não pode
 ser cobrado dele** (passe 10).
 
-O escape `DESKCOMM_GOV_MIGRATION_EDIT=1` existe para quando você já **decidiu** qual numeração é
+O escape `CLOUDYX_GOV_MIGRATION_EDIT=1` existe para quando você já **decidiu** qual numeração é
 canônica — e a decisão vai escrita no corpo do commit, não fica implícita no uso do escape.
 
 ---
@@ -463,7 +463,7 @@ Dois hooks locais desta casa disparam em merge da `main` sem que você tenha edi
 | invariantes congelados | o merge traz a versão da `main` de um arquivo de `tests/invariants/` | `git diff --quiet origin/main -- <arquivo>` → **exit 0** quer dizer que ficou IDÊNTICO ao da main: foi o merge, não você |
 | tripla da migration | ele examina só arquivo com status `A`, e um `git mv` entra como `R096` — então ele **passa de graça** na renumeração | conferir à mão contra `git log --all --name-only`, os PRs abertos e as outras branches |
 
-O escape existe (`DESKCOMM_GOV_INVARIANTS_EDIT=1`, `DESKCOMM_GOV_MIGRATION_EDIT=1`) e é legítimo
+O escape existe (`CLOUDYX_GOV_INVARIANTS_EDIT=1`, `CLOUDYX_GOV_MIGRATION_EDIT=1`) e é legítimo
 nesses dois casos — mas **a razão vai escrita no corpo do commit, com a medição**, nunca implícita
 no uso da variável. A linha do segundo caso é a mais importante: o hook da migration **não é rede
 para renumeração**, e quem lê a mensagem dele achando que é vai renumerar contra uma régua cega.
@@ -1419,7 +1419,7 @@ Cada um destes foi cometido de verdade nesta casa, e é por isso que estão escr
     Duas defesas, e a segunda é a que pega:
 
     ```bash
-    DESKCOMM_GOV_MIGRATION_EDIT=1 git commit ...        # a variável que o hook exige
+    CLOUDYX_GOV_MIGRATION_EDIT=1 git commit ...        # a variável que o hook exige
     git log --oneline -1 && git diff --stat origin/main..HEAD   # o commit EXISTE e tem o tamanho certo?
     ```
 

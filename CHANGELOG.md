@@ -4,7 +4,16 @@ Todas as mudanças relevantes deste projeto são documentadas aqui.
 
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
-Se você roda o DeskcommCRM numa VPS, **leia a seção da versão para a qual está atualizando antes de rodar `bash update.sh`**. Mudanças que exigem ação manual aparecem sob **⚠️ Requer atenção**.
+Se você roda o CloudyX CRM numa VPS, **leia a seção da versão para a qual está atualizando antes de rodar `bash update.sh`**. Mudanças que exigem ação manual aparecem sob **⚠️ Requer atenção**.
+
+> **Sobre as versões abaixo de 2.0.0.** Este projeto é um fork do
+> [DeskcommCRM](https://github.com/melgarafael/DeskcommCRM), e todo o histórico
+> anterior a 2.0.0 foi produzido lá, sob aquele nome. As entradas ficaram como
+> foram escritas — de propósito. Reescrevê-las trocando o nome faria o CloudyX
+> CRM afirmar ter lançado versões que não lançou e ter recebido contribuições
+> que foram feitas a outro projeto; e como esta página é a MESMA que a tela de
+> atualização mostra a quem opera uma VPS, a falsificação chegaria ao usuário
+> final. O nome novo começa a valer daqui para a frente.
 
 ## [Não lançado]
 

@@ -103,7 +103,17 @@ describe("paraEventoDoGoogle", () => {
 
     // O que amarra o evento de lá à linha daqui passa a ser o ID, que é nosso
     // por construção e que o Google preserva.
-    expect(idDeEventoDoGoogle(AGENDAMENTO).startsWith("deskcommapp")).toBe(true);
+    // "cloudapp" e NAO "cloudyxapp": o ID de evento do Google e base32hex — so
+    // `a-v` e `0-9` —, e `y` e `x` estao FORA dessa faixa. O prefixo e derivado de
+    // SUFIXO_ICAL_UID passando por esse filtro (`escrita.ts`), entao "cloudyx.app"
+    // vira "cloudapp". A marca anterior nao expunha isso: "deskcomm.app" cai
+    // inteira dentro de a-v e virava "deskcommapp", identica a olho.
+    //
+    // Isso nao e defeito e nao se conserta trocando o filtro: o filtro existe
+    // porque o Google recusa o ID com 400. O que importa e a CONSTANCIA — o
+    // mesmo prefixo escreve e reconhece —, e ela esta garantida por a fonte ser
+    // uma so.
+    expect(idDeEventoDoGoogle(AGENDAMENTO).startsWith("cloudapp")).toBe(true);
     expect(ehEventoNosso(idDeEventoDoGoogle(AGENDAMENTO))).toBe(true);
     // E o controle: evento de terceiro não é reconhecido como nosso.
     expect(ehEventoNosso("abc123doGoogle")).toBe(false);
@@ -115,8 +125,8 @@ describe("paraEventoDoGoogle", () => {
     // meus" sem varrer o calendário inteiro.
     const corpo = paraEventoDoGoogle(agendamento());
     expect(corpo.extendedProperties.private).toMatchObject({
-      deskcomm_org: ORG,
-      deskcomm_appointment: AGENDAMENTO,
+      cloudyx_org: ORG,
+      cloudyx_appointment: AGENDAMENTO,
     });
   });
 
