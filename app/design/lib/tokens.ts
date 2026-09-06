@@ -49,9 +49,9 @@ export const PALETTES: Record<PaletteId, PaletteDef> = {
     name: "Mono + Cyan Ocean",
     description: "Preto e branco com um único destaque: cyan oceânico (#0891b2).",
     accent: {
-      50: "#ecfeff", 100: "#cffafe", 200: "#a5f3fc", 300: "#67e8f9",
-      400: "#22d3ee", 500: "#06b6d4", 600: "#0891b2", 700: "#0e7490",
-      800: "#155e75", 900: "#164e63", 950: "#083344",
+      50: "#edf7fb", 100: "#d8f0f9", 200: "#b3e2f3", 300: "#81cee8",
+      400: "#47bbde", 500: "#0ca8cd", 600: "#0891b2", 700: "#17718a",
+      800: "#195a6d", 900: "#1a4a58", 950: "#042029",
     },
     neutralLight: {
       50: "#fafafa", 100: "#f5f5f5", 200: "#e5e5e5", 300: "#d4d4d4",

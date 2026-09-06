@@ -48,7 +48,7 @@ function blocoRoot(css: string): string {
   return css.slice(i, fim);
 }
 
-function stopsSageDoCss(): string[] {
+function stopsDoProdutoNoCss(): string[] {
   const raiz = blocoRoot(CSS);
   return GRAUS.map((g) => {
     const m = new RegExp(`--color-accent-${g}:\\s*(#[0-9a-f]{6})`, "i").exec(raiz);
@@ -103,18 +103,24 @@ describe("conversões de cor", () => {
 });
 
 describe("rampaDeSemente — catraca de calibração contra o design system", () => {
-  const esperados = stopsSageDoCss();
+  const esperados = stopsDoProdutoNoCss();
 
   it("lê 11 stops distintos do globals.css (guarda de vacuidade)", () => {
     // Sem isto, um regex quebrado devolveria lista vazia e a comparação abaixo passaria
     // por não ter o que comparar — instrumento morto tem cara de teste verde.
     expect(esperados).toHaveLength(11);
     expect(new Set(esperados).size).toBe(11);
-    expect(esperados[K]).toBe("#506d48");
+    expect(esperados[K]).toBe("#0891b2");
   });
 
-  it("reproduz os 11 stops Sage a partir de #506d48 com Δ ≤ 2/255 por canal", () => {
-    const derivada = rampaDeSemente("#506d48");
+  it("reproduz os 11 stops do produto a partir de #0891b2 com Δ ≤ 2/255 por canal", () => {
+    // ESTA CATRACA É O MOTIVO DE A RAMPA DO globals.css SER GERADA, e não colada.
+    // Ao trocar a paleta eu colei primeiro a escala cyan do Tailwind, que é bonita e
+    // NÃO sai deste algoritmo: a distância chegou a 119/255 num canal. O produto
+    // passaria a ter uma rampa feita por uma regra e todo revendedor teria a dele
+    // feita por outra — e a régua de contraste, calibrada contra a do produto,
+    // deixaria de significar o que diz. A rampa em vigor é rampaDeSemente("#0891b2").
+    const derivada = rampaDeSemente("#0891b2");
     const distancias = esperados.map((esperado, i) => distanciaPorCanal(esperado, derivada[i]!));
     expect(
       Math.max(...distancias),

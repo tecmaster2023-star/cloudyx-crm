@@ -12,7 +12,7 @@ describe("resolveBranding", () => {
     expect(resolveBranding(undefined, undefined)).toEqual({
       name: DEFAULT_APP_NAME,
       logoUrl: null,
-      initial: "D",
+      initial: "C",
     });
   });
 
@@ -131,7 +131,7 @@ describe("nome do arquivo de códigos de recuperação", () => {
   it("deriva o prefixo da marca, sem acento e sem espaço", () => {
     expect(prefixoDoArquivo("Vendas Turbo")).toBe("vendas-turbo");
     expect(prefixoDoArquivo("Ótima Gestão")).toBe("otima-gestao");
-    expect(prefixoDoArquivo(DEFAULT_APP_NAME)).toBe("deskcommcrm");
+    expect(prefixoDoArquivo(DEFAULT_APP_NAME)).toBe("cloudyx-crm");
   });
 
   it("não devolve hífen pendurado nem repetido", () => {
@@ -165,7 +165,7 @@ describe("nome do arquivo de códigos de recuperação", () => {
  *     DENTRO de `app/` e escapava pela extensão. Esse é o pior deles: o nome vai
  *     para o app autenticador e fica no celular do usuário para sempre.
  *
- * MECANISMO. A varredura é `/deskcomm/i` sobre `.ts` e `.tsx` de `app/`,
+ * MECANISMO. A varredura é `/(cloudyx|deskcomm)/i` sobre `.ts` e `.tsx` de `app/`,
  * `components/`, `lib/` e `workers/`. Cada arquivo com ocorrência precisa de uma
  * entrada em `MARCA_CONGELADA` com categoria, motivo escrito e o conjunto EXATO
  * de marcas encontradas. Arquivo novo reprova; marca nova em arquivo já
@@ -321,7 +321,7 @@ const MARCA_CONGELADA: Record<string, EntradaDeMarca> = {
     categoria: "PADRAO",
     motivo:
       "é a DEFINIÇÃO de DEFAULT_APP_NAME — o valor que aparece quando o operador não configurou marca nenhuma. Se esta linha sumir, some o padrão",
-    marcas: ["deskcommcrm"],
+    marcas: ["cloudyx"],
   },
 };
 
@@ -350,9 +350,17 @@ const RAIZES_VARRIDAS = ["app", "components", "hooks", "lib", "workers"] as cons
 /**
  * Extrai as marcas de um texto, uma por ocorrência.
  *
- * Casa `deskcomm` em qualquer caixa e leva junto o identificador inteiro em volta
- * (`x-deskcomm-signature`, `support@deskcomm.com.br`), porque é o identificador —
- * não a palavra solta — que distingue contrato de fio de vazamento de marca.
+ * Casa `cloudyx` OU `deskcomm` em qualquer caixa e leva junto o identificador
+ * inteiro em volta (`x-cloudyx-signature`, `support@cloudyx.app`), porque é o
+ * identificador — não a palavra solta — que distingue contrato de fio de
+ * vazamento de marca.
+ *
+ * AS DUAS de propósito, e não só a da casa. `cloudyx` é o que o gate existe para
+ * vigiar hoje. `deskcomm` continua no padrão porque este repositório é um fork do
+ * DeskcommCRM, e sobra da marca antiga é exatamente o que passa despercebido: um
+ * cookie, um header, o assunto de um e-mail. Quando não houver mais nenhuma, o
+ * ramo `deskcomm` deixa de casar e não custa nada — tirá-lo antes disso é apagar
+ * a rede antes de descer.
  *
  * Linha que ABRE com `//`, `*` ou `/*` é comentário e não conta: comentário não
  * chega ao usuário, e contá-lo encheria a lista de entradas inertes até ninguém
@@ -365,7 +373,7 @@ function marcasNoTexto(fonte: string): string[] {
   for (const linha of fonte.split("\n")) {
     const inicio = linha.trimStart();
     if (inicio.startsWith("//") || inicio.startsWith("*") || inicio.startsWith("/*")) continue;
-    for (const casada of linha.matchAll(/[\w@.-]*deskcomm[\w@.-]*/gi)) {
+    for (const casada of linha.matchAll(/[\w@.-]*(?:cloudyx|deskcomm)[\w@.-]*/gi)) {
       // Pontuação encostada (o ponto final de "no DeskcommCRM.") não faz parte
       // do identificador e faria a lista mudar por causa de uma vírgula.
       achadas.push(casada[0].toLowerCase().replace(/^[.-]+/, "").replace(/[.-]+$/, ""));
@@ -406,7 +414,12 @@ describe("catraca de marca hardcoded", () => {
     expect(alvos.filter((f) => f.endsWith(".tsx")).length).toBeGreaterThan(100);
   });
 
-  it("pega a marca em qualquer caixa e dentro de identificador", () => {
+  it("pega as duas marcas em qualquer caixa e dentro de identificador", () => {
+    // A da casa e a do upstream de onde este repositório saiu.
+    expect(marcasNoTexto(`const n = "CloudyX CRM";`)).toEqual(["cloudyx"]);
+    expect(marcasNoTexto(`a.download = "cloudyx-crm-recovery-codes.txt";`)).toEqual([
+      "cloudyx-crm-recovery-codes.txt",
+    ]);
     // O furo nº 1 do gate antigo, agora com asserção: `/Deskcomm/` deixava passar
     // as três formas de baixo, que são as formas em que a marca de fato aparece.
     expect(marcasNoTexto(`a.download = "deskcommcrm-recovery-codes.txt";`)).toEqual([

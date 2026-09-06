@@ -47,17 +47,17 @@
   --color-border-strong: #d4d4d4;
 
   /* Accent — Cyan Ocean (11 stops, semente #0891b2 no 600) */
-  --color-accent-50:  #ecfeff;
-  --color-accent-100: #cffafe;
-  --color-accent-200: #a5f3fc;
-  --color-accent-300: #67e8f9;
-  --color-accent-400: #22d3ee;
-  --color-accent-500: #06b6d4;
+  --color-accent-50:  #edf7fb;
+  --color-accent-100: #d8f0f9;
+  --color-accent-200: #b3e2f3;
+  --color-accent-300: #81cee8;
+  --color-accent-400: #47bbde;
+  --color-accent-500: #0ca8cd;
   --color-accent-600: #0891b2;
-  --color-accent-700: #0e7490;
-  --color-accent-800: #155e75;
-  --color-accent-900: #164e63;
-  --color-accent-950: #083344;
+  --color-accent-700: #17718a;
+  --color-accent-800: #195a6d;
+  --color-accent-900: #1a4a58;
+  --color-accent-950: #042029;
   --color-accent: var(--color-accent-600);
   --color-accent-fg: #ffffff;
   --color-accent-soft: var(--color-accent-100);
@@ -349,20 +349,20 @@
   --color-border-strong: #404040;
 
   /* Accent stays same hex stops; default shifts up for dark contrast */
-  --color-accent-50:  #ecfeff;
-  --color-accent-100: #cffafe;
-  --color-accent-200: #a5f3fc;
-  --color-accent-300: #67e8f9;
-  --color-accent-400: #22d3ee;
-  --color-accent-500: #06b6d4;
+  --color-accent-50:  #edf7fb;
+  --color-accent-100: #d8f0f9;
+  --color-accent-200: #b3e2f3;
+  --color-accent-300: #81cee8;
+  --color-accent-400: #47bbde;
+  --color-accent-500: #0ca8cd;
   --color-accent-600: #0891b2;
-  --color-accent-700: #0e7490;
-  --color-accent-800: #155e75;
-  --color-accent-900: #164e63;
-  --color-accent-950: #083344;
+  --color-accent-700: #17718a;
+  --color-accent-800: #195a6d;
+  --color-accent-900: #1a4a58;
+  --color-accent-950: #042029;
   --color-accent: var(--color-accent-400);
   --color-accent-fg: #0a0a0a;
-  --color-accent-soft: rgba(34, 211, 238, 0.16);
+  --color-accent-soft: rgba(71, 187, 222, 0.16);
   --color-accent-hover: var(--color-accent-300);
 
   /* Neutrals — cinza puro R=G=B (11 stops, dark) */
@@ -823,7 +823,7 @@
   .card-pulse {
     animation: none;
     /* Anel ESTÁTICO, não fundo: no tema claro `--color-accent-soft` é cor
-       sólida (#cffafe), e um overlay sólido sobre o card inteiro deixaria quem
+       sólida (#d8f0f9), e um overlay sólido sobre o card inteiro deixaria quem
        usa movimento reduzido 1,2s SEM LER o card. O caminho de acessibilidade
        é para ser igual, não pior — então o aviso é o mesmo anel, só que parado.
        Ele dura os PULSE_MS inteiros (useBoard.ts), NÃO os 320ms da animação:

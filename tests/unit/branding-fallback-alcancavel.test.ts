@@ -97,17 +97,21 @@ describe("`fallback_at` pelo `.env` — o caminho que existe", () => {
   });
 
   it("(b) cor boa NÃO acende — o alarme apaga, que é a outra metade do laço", () => {
-    // `#0b3d2e` não é neutro: ele produz motivos (`accent_deslocado` e
-    // `redundancia_nao_cromatica_necessaria`, medidos). É o caso que separa
-    // `CODIGOS_DE_RECUSA` de "qualquer motivo" — uma implementação ingênua
-    // deixaria `fallback_at` aceso em quase toda marca, e alarme sempre aceso é
-    // alarme que ninguém lê.
+    // `#0f172a` (navy corporativa) não é neutro: ele produz motivo
+    // (`accent_deslocado`, medido). É o caso que separa `CODIGOS_DE_RECUSA` de
+    // "qualquer motivo" — uma implementação ingênua deixaria `fallback_at` aceso
+    // em quase toda marca, e alarme sempre aceso é alarme que ninguém lê.
+    //
+    // A semente ERA `#0b3d2e` (verde-escuro), escolhida por produzir dois motivos
+    // contra a régua Sage. Contra a régua Cyan Ocean ela produz ZERO — e um caso
+    // cuja premissa some passa a medir o nada, verde. Trocada por uma que ainda
+    // exerce a propriedade, e não por um número afrouxado.
     const marca = resolverMarca(
-      [camadaDoAmbiente({ APP_ACCENT_HEX: "#0b3d2e" })],
+      [camadaDoAmbiente({ APP_ACCENT_HEX: "#0f172a" })],
       REGUA_DO_PRODUTO,
     );
     expect(marca.motivos.length).toBeGreaterThan(0);
-    expect(fallbackDoAmbiente("#0b3d2e")).toBeNull();
+    expect(fallbackDoAmbiente("#0f172a")).toBeNull();
 
     // Chave declarada e vazia é o estado de fábrica do `install.sh`, não defeito.
     expect(fallbackDoAmbiente("")).toBeNull();

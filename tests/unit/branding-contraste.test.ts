@@ -92,7 +92,7 @@ describe("extrairRegua — os pares saem do globals.css, nunca de lista à mão"
     const fg = REGUA.claro.papeis.find((p) => p.token === "--color-accent-fg");
     expect(fg?.tipo).toBe("texto");
     expect(REGUA.claro.tingidas.map((t) => t.chave)).toEqual(["--color-accent-soft"]);
-    // No escuro o token é o literal `rgba(34,211,238,0.16)` — cyan cru, sem
+    // No escuro o token é o literal `rgba(71,187,222,0.16)` — cyan cru, sem
     // referência à rampa. É por isso que ele precisa ser REANCORADO na derivação.
     expect(REGUA.escuro.indices.soft).toBeNull();
     expect(REGUA.escuro.alfaDoSoft).toBeCloseTo(0.16, 6);
@@ -311,7 +311,7 @@ describe("derivarMarca — as 16 sementes adversariais", () => {
   });
 
   it("--color-accent-soft do tema escuro é derivado, não o cyan cru", () => {
-    // O literal `rgba(34, 211, 238, 0.16)` sobreviveria intacto a qualquer override da
+    // O literal `rgba(71, 187, 222, 0.16)` sobreviveria intacto a qualquer override da
     // rampa — seria um pedaço da NOSSA marca dentro da instalação do cliente.
     const azul = derivarMarca("#2563eb", REGUA);
     expect(azul.escuro.accentSoft).toMatch(/^rgba\(\d+, \d+, \d+, 0\.16\)$/);
@@ -448,7 +448,7 @@ describe("marca acromática — o accent do produto permanece", () => {
         separacaoDoNeutro(regua, tema.grauDoAccent, tema.accent),
       ).toBeGreaterThanOrEqual(PISO_DE_SEPARACAO_DO_NEUTRO);
     }
-    // Os números exatos, medidos: 0,2033 no claro (accent-600 × neutral-600) e 0,2762
+    // Os números exatos, medidos: 0,2033 no claro (accent-600 × neutral-600) e 0,2175
     // no escuro (accent-400 × neutral-400).
     //
     // ⚠️ O ARGUMENTO QUE ESTAS LINHAS CARREGAVAM MORREU COM A PALETA, e fica
@@ -461,7 +461,7 @@ describe("marca acromática — o accent do produto permanece", () => {
     // marcas de cliente, não mais a nossa própria cor. A asserção `toBeLessThan` saiu
     // porque afirmar o contrário dela seria fixar uma folga que nada exige.
     expect(separacaoDoNeutro(REGUA.claro, marca.claro.grauDoAccent, marca.claro.accent)).toBeCloseTo(0.2033, 4);
-    expect(separacaoDoNeutro(REGUA.escuro, marca.escuro.grauDoAccent, marca.escuro.accent)).toBeCloseTo(0.2762, 4);
+    expect(separacaoDoNeutro(REGUA.escuro, marca.escuro.grauDoAccent, marca.escuro.accent)).toBeCloseTo(0.2175, 4);
 
     // Controle negativo: um accent cinza reprovaria as duas guardas. Sem esta linha, os
     // pisos acima poderiam ser satisfeitos por qualquer coisa.
