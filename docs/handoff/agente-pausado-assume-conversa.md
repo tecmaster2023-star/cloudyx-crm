@@ -464,7 +464,7 @@ imagem **por número de versão**:
 
 ```
 git tag -l 'v*' --sort=-v:refname | head -1      # o alvo do update.sh
-APP_IMAGE=ghcr.io/srkyler/cloudyx-crm:1.9.1  # o que está lá hoje
+APP_IMAGE=ghcr.io/tecmaster2023-star/cloudyx-crm:1.9.1  # o que está lá hoje
 ```
 
 Então merge do #408 **não basta**. A sequência é:

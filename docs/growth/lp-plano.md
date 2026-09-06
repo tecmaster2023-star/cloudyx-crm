@@ -339,7 +339,7 @@ Imagem: a mesma tela em duas marcas diferentes, lado a lado.
 Bloco de código real, copiável:
 
 ```bash
-git clone https://github.com/srkyler/cloudyx-crm.git
+git clone https://github.com/tecmaster2023-star/cloudyx-crm.git
 cd CloudyX CRM/hostgator-setup-kit
 bash install.sh
 ```

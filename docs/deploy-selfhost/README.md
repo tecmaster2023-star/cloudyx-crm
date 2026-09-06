@@ -23,7 +23,7 @@
 ## 1. Clonar e configurar
 
 ```bash
-git clone https://github.com/srkyler/cloudyx-crm.git && cd CloudyX CRM
+git clone https://github.com/tecmaster2023-star/cloudyx-crm.git && cd CloudyX CRM
 cp .env.hostgator.example .env   # o template de produção (o .env.example é o de dev)
 ```
 

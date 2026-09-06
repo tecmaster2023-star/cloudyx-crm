@@ -11,7 +11,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript)](https://www.typescriptlang.org)
 [![Supabase](https://img.shields.io/badge/Supabase-Postgres%2BAuth%2BStorage-3ecf8e?logo=supabase)](https://supabase.com)
 [![Self-hosted](https://img.shields.io/badge/self--hosted-one%20command-orange)](hostgator-setup-kit/)
-[![CI](https://github.com/srkyler/cloudyx-crm/actions/workflows/ci.yml/badge.svg)](https://github.com/srkyler/cloudyx-crm/actions/workflows/ci.yml)
+[![CI](https://github.com/tecmaster2023-star/cloudyx-crm/actions/workflows/ci.yml/badge.svg)](https://github.com/tecmaster2023-star/cloudyx-crm/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 [**⚡ Install**](#-install-on-your-vps-the-main-path) · [**🔄 Update**](#-updating) · [**🧭 Vision**](VISION.md) · [**🏗️ Architecture**](ARCHITECTURE.md) · [**🤝 Contributing**](CONTRIBUTING.md) · [**🗺️ Roadmap**](#%EF%B8%8F-roadmap)
@@ -34,7 +34,7 @@
 > command for your case:
 >
 > ```bash
-> curl -fsSL https://raw.githubusercontent.com/srkyler/cloudyx-crm/main/hostgator-setup-kit/comecar.sh | bash
+> curl -fsSL https://raw.githubusercontent.com/tecmaster2023-star/cloudyx-crm/main/hostgator-setup-kit/comecar.sh | bash
 > ```
 >
 > *(prefer to read before executing? clone the repo and run `bash hostgator-setup-kit/comecar.sh` —
@@ -67,7 +67,7 @@ That is not a freeze: the terminal is hiding your password. Type (or paste) it a
 Once inside the VPS:
 
 ```bash
-git clone https://github.com/srkyler/cloudyx-crm.git
+git clone https://github.com/tecmaster2023-star/cloudyx-crm.git
 cd CloudyX CRM
 bash hostgator-setup-kit/install.sh
 ```
@@ -269,7 +269,7 @@ Details: [`ARCHITECTURE.md`](ARCHITECTURE.md).
 > This section is for people who will change the code.
 
 ```bash
-git clone https://github.com/srkyler/cloudyx-crm.git
+git clone https://github.com/tecmaster2023-star/cloudyx-crm.git
 cd CloudyX CRM
 
 nvm use                     # Node 22
@@ -308,7 +308,7 @@ pnpm test:e2e      # Playwright (requires dev server)
 **These checks are required** to merge into `main`. This list has already said "four" and then "five" — **measure, don't trust it**:
 
 ```bash
-gh api repos/srkyler/cloudyx-crm/branches/main/protection \
+gh api repos/tecmaster2023-star/cloudyx-crm/branches/main/protection \
   --jq '.required_status_checks.contexts|join(", ")'
 # on 2026-08-14: verify, build-and-size, invariants, e2e, imagens-ok
 ```
@@ -375,9 +375,9 @@ Two required gates do **not** fit there and only run in CI: `e2e` (needs a local
 
 ## 🐛 Reporting bugs
 
-Open an [issue](https://github.com/srkyler/cloudyx-crm/issues/new/choose) — the template asks for what we need (environment, `/api/v1/health`, steps). Running `bash hostgator-setup-kit/healthcheck.sh` and pasting the output helps a lot.
+Open an [issue](https://github.com/tecmaster2023-star/cloudyx-crm/issues/new/choose) — the template asks for what we need (environment, `/api/v1/health`, steps). Running `bash hostgator-setup-kit/healthcheck.sh` and pasting the output helps a lot.
 
-For **security vulnerabilities**, **do NOT open a public issue** — use [private vulnerability reporting](https://github.com/srkyler/cloudyx-crm/security/advisories/new). Details in [`SECURITY.md`](SECURITY.md).
+For **security vulnerabilities**, **do NOT open a public issue** — use [private vulnerability reporting](https://github.com/tecmaster2023-star/cloudyx-crm/security/advisories/new). Details in [`SECURITY.md`](SECURITY.md).
 
 ---
 
@@ -408,10 +408,10 @@ For **security vulnerabilities**, **do NOT open a public issue** — use [privat
 
 ## 💬 Community
 
-- **Discussions:** [GitHub Discussions](https://github.com/srkyler/cloudyx-crm/discussions)
-- **Issues:** [GitHub Issues](https://github.com/srkyler/cloudyx-crm/issues)
-- **Instagram:** [@srkyler](https://www.instagram.com/srkyler)
-- **YouTube:** [youtube.com/@srkyler](https://www.youtube.com/@srkyler)
+- **Discussions:** [GitHub Discussions](https://github.com/tecmaster2023-star/cloudyx-crm/discussions)
+- **Issues:** [GitHub Issues](https://github.com/tecmaster2023-star/cloudyx-crm/issues)
+- **Instagram:** [@tecmaster2023-star](https://www.instagram.com/tecmaster2023-star)
+- **YouTube:** [youtube.com/@tecmaster2023-star](https://www.youtube.com/@tecmaster2023-star)
 
 ---
 
