@@ -1,8 +1,10 @@
-// Design tokens for DeskcommCRM showcase.
-// "Soft-tech / calmo" — neutros desaturados (greige/warm-gray), accent não-saturado.
+// Design tokens for CloudyX CRM showcase.
+// A paleta EM USO pelo produto é `monoCyan` (preto-e-branco + Cyan Ocean) — é ela que
+// o `app/globals.css` materializa, e as outras cinco são exploração histórica do
+// desenho "soft-tech / calmo" (neutros greige, accent não-saturado) que a precedeu.
 // 5-Constraint Rule applied: Shape, Color (exact hex), Typography, Motion, Layout.
 
-export type PaletteId = "sage" | "clay" | "mist" | "plum" | "olive";
+export type PaletteId = "monoCyan" | "sage" | "clay" | "mist" | "plum" | "olive";
 export type TypoId = "bricolage-jakarta" | "fraunces-manrope" | "atkinson" | "source-plex";
 export type DensityId = "aerada" | "equilibrada" | "compacta";
 export type ThemeId = "light" | "dark";
@@ -38,6 +40,38 @@ export type PaletteDef = {
 // ─── Palettes ──────────────────────────────────────────────────────────────
 
 export const PALETTES: Record<PaletteId, PaletteDef> = {
+  // A paleta do produto. Os valores são os MESMOS de app/globals.css — quem manda lá é
+  // o CSS (é dele que `extrairRegua` deriva a régua de contraste em runtime); esta
+  // entrada existe para o showcase conseguir mostrar o produto ao lado das
+  // explorações. Divergiram? O CSS está certo.
+  monoCyan: {
+    id: "monoCyan",
+    name: "Mono + Cyan Ocean",
+    description: "Preto e branco com um único destaque: cyan oceânico (#0891b2).",
+    accent: {
+      50: "#ecfeff", 100: "#cffafe", 200: "#a5f3fc", 300: "#67e8f9",
+      400: "#22d3ee", 500: "#06b6d4", 600: "#0891b2", 700: "#0e7490",
+      800: "#155e75", 900: "#164e63", 950: "#083344",
+    },
+    neutralLight: {
+      50: "#fafafa", 100: "#f5f5f5", 200: "#e5e5e5", 300: "#d4d4d4",
+      400: "#a3a3a3", 500: "#737373", 600: "#525252", 700: "#404040",
+      800: "#262626", 900: "#171717", 950: "#0a0a0a",
+    },
+    neutralDark: {
+      50: "#fafafa", 100: "#ededed", 200: "#d4d4d4", 300: "#a3a3a3",
+      400: "#737373", 500: "#404040", 600: "#262626", 700: "#1f1f1f",
+      800: "#141414", 900: "#0a0a0a", 950: "#050505",
+    },
+    states: {
+      light: { success: "#15803d", warning: "#b45309", error: "#b91c1c", info: "#1d4ed8" },
+      dark:  { success: "#4ade80", warning: "#fbbf24", error: "#f87171", info: "#60a5fa" },
+    },
+    surfaces: {
+      light: { bg: "#fafafa", surface: "#ffffff", surfaceElevated: "#f5f5f5", text: "#171717", textMuted: "#525252", border: "#e5e5e5" },
+      dark:  { bg: "#0a0a0a", surface: "#141414", surfaceElevated: "#1f1f1f", text: "#fafafa", textMuted: "#a3a3a3", border: "#262626" },
+    },
+  },
   sage: {
     id: "sage",
     name: "Sage",
