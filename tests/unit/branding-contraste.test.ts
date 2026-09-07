@@ -71,18 +71,24 @@ describe("extrairRegua — os pares saem do globals.css, nunca de lista à mão"
   });
 
   it("alcança o anel de foco, que mora em @layer base e uma lista à mão perderia", () => {
-    // ESTE é o par do relato, e com a Cyan Ocean ele deixou de ser hipótese: na Sage,
-    // `accent-600` dava 5,51 contra o bg e o anel, pintado com `accent-500`, dava 3,79 —
-    // folgado, mas MENOR, e uma régua que só olhasse o stop da semente não veria.
-    // No cyan a mesma estrutura produziu a falha de verdade: `accent-500` (#06b6d4) mede
-    // 2,33 contra o fundo claro, ABAIXO do piso 3,0 de elemento não-textual, enquanto
-    // `accent-600` mede 3,53 e passaria o gate ingênuo. Foi esta régua que pegou, e por
-    // isso o anel do tema claro subiu para o 600 — daí o índice 6 abaixo, contra o 4 do
-    // tema escuro, onde `accent-400` sobre `#0a0a0a` folga.
+    // ESTE é o par do relato, e com a Cyan Ocean ele deixou de ser hipótese. A subida
+    // do anel aconteceu em DOIS passos, e o segundo veio de um defeito que este
+    // arquivo não pegava:
+    //
+    //   1. `accent-500` (#0ca8cd) mede 2,33 contra o fundo claro — ABAIXO do piso 3,0
+    //      de elemento não-textual. Foi esta régua que pegou, e o anel subiu ao 600.
+    //   2. Depois mediu-se o RÓTULO: `--color-accent-fg: #ffffff` sobre o accent-600
+    //      dá 3,68, abaixo do piso 4,5 de TEXTO. O gate não via porque mede a frente
+    //      CALCULADA (`melhorFrenteSobre` → #000000, 5,70), nunca o literal que o CSS
+    //      envia. O accent inteiro subiu ao 700, e o anel foi junto para não voltar a
+    //      ser a parada mais justa da tela.
+    //
+    // Daí o índice 7 abaixo, contra o 4 do tema escuro, onde `accent-400` sobre
+    // `#0a0a0a` folga em 8,89.
     const foco = REGUA.claro.papeis.find((p) => p.token.includes(":focus-visible"));
     expect(foco, "o anel de foco sumiu da régua").toBeDefined();
     expect(foco?.tipo).toBe("componente");
-    expect(foco?.fonte).toMatchObject({ tipo: "grau", indice: 6 });
+    expect(foco?.fonte).toMatchObject({ tipo: "grau", indice: 7 });
 
     const focoEscuro = REGUA.escuro.papeis.find((p) => p.token.includes(":focus-visible"));
     expect(focoEscuro?.fonte).toMatchObject({ tipo: "grau", indice: 4 });
@@ -126,14 +132,14 @@ describe("extrairRegua — os pares saem do globals.css, nunca de lista à mão"
     const razao = (papel: string, superficie: string) =>
       pares.find((p) => p.papel === papel && p.superficie === superficie)?.razao ?? 0;
 
-    // Medidas contra a Cyan Ocean. As três CAÍRAM em relação à Sage (5,51 · 3,79 ·
-    // 3,60) e a razão é física, não descuido: na mesma parada da rampa, cyan é mais
-    // claro que verde. É por isso que o anel de foco subiu do 500 para o 600 no tema
-    // claro — no 500 ele media 2,33 e ficava ABAIXO do piso 3,0 de elemento
-    // não-textual. Accent e anel agora medem igual porque são a mesma parada.
-    expect(razao("--color-accent", "--color-bg")).toBeCloseTo(3.53, 2);
-    expect(razao(":focus-visible/outline", "--color-bg")).toBeCloseTo(3.53, 2);
-    expect(razao(":focus-visible/outline", "--color-surface-elevated")).toBeCloseTo(3.38, 2);
+    // Medidas contra a Cyan Ocean com o accent no 700. Ficaram MUITO perto das da
+    // Sage (5,51 · 3,79 · 3,60), e isso não é coincidência: a subida de parada foi
+    // feita para recuperar exatamente essa folga, depois que o cyan-600 se mostrou
+    // claro demais para carregar rótulo branco. Accent e anel medem igual porque
+    // são a mesma parada.
+    expect(razao("--color-accent", "--color-bg")).toBeCloseTo(5.34, 2);
+    expect(razao(":focus-visible/outline", "--color-bg")).toBeCloseTo(5.34, 2);
+    expect(razao(":focus-visible/outline", "--color-surface-elevated")).toBeCloseTo(5.12, 2);
   });
 
   it("a Cyan Ocean inteira, como está no CSS, cabe nos pisos", () => {
@@ -236,9 +242,12 @@ describe("derivarMarca — as 16 sementes adversariais", () => {
         .map((t) => `${semente}/${t.deslocamento}`),
     );
     expect(deslocados.length).toBeGreaterThan(0);
-    // 11 e não 13: a fixture trocou a Sage pela Cyan Ocean no controle positivo, e a
-    // caminhada anda um passo a menos em duas sementes. Medido, não estimado.
-    expect(deslocados).toHaveLength(11);
+    // 8, e o número caiu duas vezes por razões diferentes: primeiro de 13 para 11,
+    // quando a fixture trocou a Sage pela Cyan Ocean no controle positivo; depois
+    // para 8, quando o accent do produto subiu para o 700. A segunda queda é o
+    // efeito esperado — partindo de uma parada mais escura, menos sementes
+    // precisam andar para alcançar o piso. Medido, não estimado.
+    expect(deslocados).toHaveLength(8);
 
     // O amarelo é o caso que NÃO tem escapatória física: nenhum stop claro de amarelo
     // alcança 3:1 contra `#ffffff`. Se ele parar de andar, a caminhada quebrou.
@@ -412,12 +421,12 @@ describe("reconciliação — quem se move são as NOSSAS semânticas", () => {
         }
       }
     }
-    // Guarda de vacuidade do run inteiro: 18 movimentos medidos nas 16 sementes.
+    // Guarda de vacuidade do run inteiro: 17 movimentos medidos nas 16 sementes.
     // Eram 23 na Sage. Caiu porque o accent saiu do verde — onde disputava espaço com
     // `success` — para o cyan, que só encosta em `info`. Menos movimento aqui é a
     // paleta colidindo menos, não o mecanismo desligando: o controle positivo do
     // `describe` acima prova que ele dispara.
-    expect(movimentosNoRun).toBe(18);
+    expect(movimentosNoRun).toBe(17);
   });
 });
 
@@ -448,7 +457,7 @@ describe("marca acromática — o accent do produto permanece", () => {
         separacaoDoNeutro(regua, tema.grauDoAccent, tema.accent),
       ).toBeGreaterThanOrEqual(PISO_DE_SEPARACAO_DO_NEUTRO);
     }
-    // Os números exatos, medidos: 0,2033 no claro (accent-600 × neutral-600) e 0,2175
+    // Os números exatos, medidos: 0,1643 no claro (accent-700 × neutral-700) e 0,2175
     // no escuro (accent-400 × neutral-400).
     //
     // ⚠️ O ARGUMENTO QUE ESTAS LINHAS CARREGAVAM MORREU COM A PALETA, e fica
@@ -460,7 +469,7 @@ describe("marca acromática — o accent do produto permanece", () => {
     // pelo qual PISO_DE_SEPARACAO_DO_NEUTRO segue em 0,05 passou a ser a margem para
     // marcas de cliente, não mais a nossa própria cor. A asserção `toBeLessThan` saiu
     // porque afirmar o contrário dela seria fixar uma folga que nada exige.
-    expect(separacaoDoNeutro(REGUA.claro, marca.claro.grauDoAccent, marca.claro.accent)).toBeCloseTo(0.2033, 4);
+    expect(separacaoDoNeutro(REGUA.claro, marca.claro.grauDoAccent, marca.claro.accent)).toBeCloseTo(0.1643, 4);
     expect(separacaoDoNeutro(REGUA.escuro, marca.escuro.grauDoAccent, marca.escuro.accent)).toBeCloseTo(0.2175, 4);
 
     // Controle negativo: um accent cinza reprovaria as duas guardas. Sem esta linha, os
@@ -483,7 +492,24 @@ describe("marca acromática — o accent do produto permanece", () => {
       const marca = derivarMarca(navy, REGUA);
       expect(hexParaOklch(navy).C, navy).toBeGreaterThan(LIMIAR_ACROMATICO);
       expect(marca.origemDaRampa, navy).toBe("semente");
-      expect(marca.claro.accent, navy).toBe(navy);
+      // ⚠️ ESTA LINHA ERA `toBe(navy)` — o hex EXATO da semente — e deixou de ser
+      // verdade por DESENHO, não por defeito. O accent do produto subiu da parada
+      // 600 para a 700 (o rótulo branco sobre o cyan-600 media 3,68, abaixo do piso
+      // de texto), e o índice do accent é o mesmo para o produto e para a marca do
+      // cliente. Logo o accent de repouso passou a ser a parada 700 da rampa DELE.
+      //
+      // A consequência é de produto e está escrita em docs/white-label.md: o sistema
+      // promete a cor do cliente LEGÍVEL, não o hex dele em toda superfície. Ele
+      // continua sendo a semente de que a rampa inteira nasce, e segue visível na
+      // parada 600 (tinta suave, borda, realce).
+      //
+      // O que este caso precisa provar continua provado, e mais precisamente: a
+      // rampa é a DA SEMENTE (asserção acima) e o accent é uma parada DELA — não do
+      // produto. Um bug que caísse na rampa do produto passaria por `toBe(navy)`
+      // apenas por coincidência de hex; não passa por esta.
+      const rampaDoCliente = rampaDeSemente(navy);
+      expect(rampaDoCliente, navy).toContain(marca.claro.accent);
+      expect(marca.claro.accent, navy).not.toBe(REGUA.rampaDoProduto[REGUA.claro.indices.accent]);
     }
   });
 });

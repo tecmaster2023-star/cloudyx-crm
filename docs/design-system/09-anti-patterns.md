@@ -22,8 +22,13 @@ Lista canônica do que **não fazer** no CloudyX CRM. Anti-patterns ficam aqui p
 
 ## 3. ❌ Gradient roxo/azul/rosa em hero ou primary button
 
-**Por quê:** símbolo do "AI SaaS 2024". Datado e clichê. Não combina com soft-tech calmo.
-**✅ Sim:** solid `accent-500` (Sage `#67885d`). Profundidade vem de border + shadow neutro, não gradient.
+**Por quê:** símbolo do "AI SaaS 2024". Datado e clichê.
+**✅ Sim:** accent sólido (Cyan Ocean `#0891b2`). Profundidade vem de borda + sombra, não de gradient de marca.
+
+**Ressalva, porque a regra é sobre DECORAÇÃO e não sobre a técnica:** o brilho
+especular de `.cartao-3d` é um `radial-gradient` e continua permitido. Ele não
+pinta a marca — ele modela a luz que a inclinação exige, e some quando o ponteiro
+sai. Gradient proibido é o que decora uma superfície parada.
 
 ---
 
@@ -104,17 +109,30 @@ Lista canônica do que **não fazer** no CloudyX CRM. Anti-patterns ficam aqui p
 
 ---
 
-## 15. ❌ Sombras com preto puro (`rgba(0,0,0,0.X)`)
+## 15. ❌ Sombra de uma camada só, ou com deslocamento horizontal
 
-**Por quê:** preto puro contra warm-bg vibra (gera halo cinza). Quebra coerência.
-**✅ Sim:** `rgba(20, 18, 14, X)` — cor do texto neutro. Ver `01-foundation-tokens.md` § Shadow.
+**Por quê:** elevação de uma camada vira "caixa de papelão" — falta o contato que
+cola o objeto na superfície e o ambiente que o assenta. E deslocamento horizontal
+quebra a convenção de luz única (no alto, levemente à frente): duas sombras com
+direções diferentes na mesma tela fazem a interface parecer colagem.
+**✅ Sim:** três camadas (contato + forma + ambiente), `x = 0`. Ver `07-motion-language.md` § A luz é uma só.
+
+**⚠️ ESTA REGRA ERA OUTRA, e a anterior VENCEU com a paleta.** Ela dizia: *"❌
+sombras com preto puro `rgba(0,0,0,X)` — preto puro contra warm-bg vibra (gera
+halo cinza); ✅ `rgba(20, 18, 14, X)`"*. O raciocínio estava certo **enquanto o
+fundo era greige**: sombra neutra sobre fundo quente realmente vibra. Com a paleta
+preto-e-branco não existe mais fundo quente para vibrar contra — o neutro do
+sistema É o preto, e tingir a sombra passaria a ser a incoerência. O CSS foi
+convertido para `rgba(0,0,0,X)` no commit da paleta; esta linha estava proibindo o
+que o produto faz.
 
 ---
 
 ## 16. ❌ `#fff` puro como bg de página em light mode
 
 **Por quê:** branco puro reflete demais em sessão longa, causa fadiga.
-**✅ Sim:** `bg: #faf9f6` (offwhite warm). `surface` (cards) sim usa `#ffffff` puro pra contraste.
+**✅ Sim:** `bg: #fafafa` (o degrau 50 do cinza). `surface` (cards) sim usa `#ffffff`
+puro — é o contraste entre os dois que faz o card existir como objeto.
 
 ---
 
@@ -180,6 +198,32 @@ Lista canônica do que **não fazer** no CloudyX CRM. Anti-patterns ficam aqui p
 **✅ Sim:** `cursor: pointer` apenas em elementos com `onClick`. Card que tem subelementos clicáveis usa cursor `default`.
 
 ---
+
+## 26. ❌ Inclinação 3D em superfície de trabalho
+
+**Por quê:** a régua das oito horas. `.cartao-3d` vale onde a pessoa EXPLORA (um
+card que se abre, um painel, uma visão geral). No inbox, na tabela e na fila ela
+passa 400 vezes por turno, e o efeito que encanta na demo é o que cansa no uso.
+**✅ Sim:** `.cartao-interativo` (elevação no hover) em qualquer lugar; `.cartao-3d`
+só em exploração, e nunca abaixo de 200×120px. Ver `07-motion-language.md`.
+
+---
+
+## 27. ❌ Rotação 3D acima de 6°
+
+**Por quê:** acima disso o texto do card distorce visivelmente — o efeito passa a
+cobrar legibilidade do conteúdo que ele deveria valorizar.
+**✅ Sim:** teto de 6° por eixo, perspectiva ≥ 900px.
+
+---
+
+## 28. ❌ Hover, press ou foco implementados em JS
+
+**Por quê:** eles têm de funcionar ANTES de a hidratação terminar — e é no primeiro
+segundo que a pessoa passa o mouse. Card que só fica pegável depois do JS é card
+quebrado, e o defeito não aparece em dev (onde tudo já está carregado).
+**✅ Sim:** CSS sempre. GSAP só onde CSS não alcança: perseguir alvo que se move
+(inércia do ponteiro) e sequência com dependência entre passos.
 
 ## Como usar este doc
 

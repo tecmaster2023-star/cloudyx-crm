@@ -312,10 +312,11 @@ describe("o bloco emitido não pode contradizer o globals.css", () => {
   it("a caminhada de fato ANDA — e a emissão anda junto", () => {
     // Guarda de vacuidade da sabotagem: se nenhuma semente deslocasse, emitir a
     // rampa crua e emiti-la deslocada dariam o mesmo texto, e os testes acima
-    // seriam verdes contra o defeito. 11 combos (semente × tema) andam — o mesmo
+    // seriam verdes contra o defeito. 8 combos (semente × tema) andam — o mesmo
     // número que `branding-contraste.test.ts` mede na derivação, e os dois têm de
-    // continuar batendo: eram 13 com a paleta greige, e caíram junto quando a
-    // fixture trocou a Sage pela Cyan Ocean no controle positivo.
+    // continuar batendo: eram 13 com a paleta greige, caíram para 11 quando a
+    // fixture trocou a Sage pela Cyan Ocean, e para 8 quando o accent subiu para
+    // o 700 (de uma parada mais escura, menos sementes precisam andar).
     let andaram = 0;
     for (const hex of SEMENTES) {
       const cor = corDe(hex);
@@ -334,7 +335,7 @@ describe("o bloco emitido não pode contradizer o globals.css", () => {
         );
       }
     }
-    expect(andaram).toBe(11);
+    expect(andaram).toBe(8);
   });
 });
 
@@ -357,9 +358,11 @@ describe("controle positivo — o produto sem marca não pode se mexer", () => {
 
     const p = pintadosDaSemente("#0891b2");
     // Claro: os dois números que `contraste.ts` documenta como medidos à mão.
-    // O anel mora no stop 600 no tema claro (o 500 ficava em 2,33, abaixo do piso).
-    expect(foco(p.claro, "--color-bg")).toBeCloseTo(3.53, 2);
-    expect(foco(p.claro, "--color-surface-elevated")).toBeCloseTo(3.38, 2);
+    // O anel mora no stop 700 no tema claro. Foram duas subidas: o 500 media 2,33
+    // (abaixo do piso de componente) e o 600 deixava o RÓTULO branco em 3,68
+    // (abaixo do piso de texto).
+    expect(foco(p.claro, "--color-bg")).toBeCloseTo(5.34, 2);
+    expect(foco(p.claro, "--color-surface-elevated")).toBeCloseTo(5.12, 2);
     // Escuro: o anel mora no stop 400 sobre fundo quase preto, então folga muito
     // mais do que folgava no greige.
     expect(foco(p.escuro, "--color-bg")).toBeCloseTo(8.89, 2);
@@ -391,8 +394,8 @@ describe("a navy #0f172a — o defeito que a prova em tela achou", () => {
     // deslocamento, e quem o prova é o laço abaixo, contra o piso — os números
     // são o registro de quanto foi, não a asserção que importa.
     const p = pintadosDaSemente("#0f172a");
-    expect(foco(p.claro, "--color-bg")).toBeCloseTo(17.1, 2);
-    expect(foco(p.claro, "--color-surface-elevated")).toBeCloseTo(16.38, 2);
+    expect(foco(p.claro, "--color-bg")).toBeCloseTo(16.83, 2);
+    expect(foco(p.claro, "--color-surface-elevated")).toBeCloseTo(16.11, 2);
     expect(foco(p.escuro, "--color-bg")).toBeCloseTo(5.72, 2);
     expect(foco(p.escuro, "--color-surface-elevated")).toBeCloseTo(4.77, 2);
     for (const superficie of ["--color-bg", "--color-surface-elevated"] as const) {

@@ -69,7 +69,7 @@ export const REGUA_DO_PRODUTO: Regua = {
         "tipo": "componente",
         "fonte": {
           "tipo": "grau",
-          "indice": 6,
+          "indice": 7,
           "alfa": 1
         },
         "contra": null
@@ -81,14 +81,14 @@ export const REGUA_DO_PRODUTO: Regua = {
           "tipo": "frenteCalculada",
           "sobre": {
             "tipo": "grau",
-            "indice": 6,
+            "indice": 7,
             "alfa": 1
           }
         },
         "contra": [
           {
             "tipo": "grau",
-            "indice": 6,
+            "indice": 7,
             "alfa": 1
           }
         ]
@@ -98,7 +98,7 @@ export const REGUA_DO_PRODUTO: Regua = {
         "tipo": "componente",
         "fonte": {
           "tipo": "grau",
-          "indice": 7,
+          "indice": 8,
           "alfa": 1
         },
         "contra": null
@@ -108,7 +108,7 @@ export const REGUA_DO_PRODUTO: Regua = {
         "tipo": "componente",
         "fonte": {
           "tipo": "grau",
-          "indice": 6,
+          "indice": 7,
           "alfa": 1
         },
         "contra": null
@@ -134,7 +134,7 @@ export const REGUA_DO_PRODUTO: Regua = {
         "tipo": "componente",
         "fonte": {
           "tipo": "grau",
-          "indice": 6,
+          "indice": 7,
           "alfa": 1
         },
         "contra": null
@@ -172,8 +172,8 @@ export const REGUA_DO_PRODUTO: Regua = {
       "#0a0a0a"
     ],
     "indices": {
-      "accent": 6,
-      "hover": 7,
+      "accent": 7,
+      "hover": 8,
       "soft": 1
     },
     "alfaDoSoft": 1

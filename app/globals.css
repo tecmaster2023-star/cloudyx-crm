@@ -58,10 +58,10 @@
   --color-accent-800: #195a6d;
   --color-accent-900: #1a4a58;
   --color-accent-950: #042029;
-  --color-accent: var(--color-accent-600);
+  --color-accent: var(--color-accent-700);
   --color-accent-fg: #ffffff;
   --color-accent-soft: var(--color-accent-100);
-  --color-accent-hover: var(--color-accent-700);
+  --color-accent-hover: var(--color-accent-800);
 
   /* Neutrals — cinza puro R=G=B (11 stops, light) */
   --color-neutral-50:  #fafafa;
@@ -161,7 +161,7 @@
   --destructive-foreground: #ffffff;
   --border: var(--color-border);
   --input: var(--color-border);
-  --ring: var(--color-accent-600);
+  --ring: var(--color-accent-700);
   --radius: var(--radius-md);
   /* ---- Agenda · cor de pessoa (8 trilhas) ------------------------------
    * Quem é o dono do compromisso é o eixo visual da grade, e a accent NÃO
@@ -265,10 +265,10 @@
   --color-text-subtle: #737373;
   --color-border: #e5e5e5;
   --color-border-strong: #d4d4d4;
-  --color-accent: var(--color-accent-600);
+  --color-accent: var(--color-accent-700);
   --color-accent-fg: #ffffff;
   --color-accent-soft: var(--color-accent-100);
-  --color-accent-hover: var(--color-accent-700);
+  --color-accent-hover: var(--color-accent-800);
   --color-neutral-50: #fafafa;
   --color-neutral-100: #f5f5f5;
   --color-neutral-200: #e5e5e5;
@@ -314,7 +314,7 @@
   --destructive-foreground: #ffffff;
   --border: var(--color-border);
   --input: var(--color-border);
-  --ring: var(--color-accent-600);
+  --ring: var(--color-accent-700);
   /* ---- Agenda · cor de pessoa (espelho do :root) -----------------------
    * Espelhado aqui porque o tema escuro sobrescreve estas oito chaves, e
    * `tests/unit/branding-tema-claro-escopavel.test.ts` exige que este bloco
@@ -521,7 +521,7 @@
   --color-border: var(--color-border);
   --color-border-strong: var(--color-border-strong);
   --color-input: var(--color-border);
-  --color-ring: var(--color-accent-600);
+  --color-ring: var(--color-accent-700);
   --color-background: var(--color-bg);
   --color-foreground: var(--color-text);
   --color-primary: var(--color-accent);
@@ -707,15 +707,18 @@
     color: var(--color-accent-50);
   }
 
-  /* Focus ring: Cyan Ocean 600/400, 2px with offset.
-     600 e não 500 no tema CLARO: medido, o cyan-500 (#06b6d4) dá 2,33:1
-     contra o fundo — abaixo do piso 3,0 de elemento não-textual (WCAG
-     1.4.11), e anel de foco é o indicador de quem navega por teclado. O
-     sage-500 da paleta anterior passava (3,79) porque verde escurece mais
-     rápido que cyan na mesma parada. O escuro segue no 400: sobre #0a0a0a
-     ele folga. Vigiado por tests/unit/branding-contraste.test.ts. */
+  /* Focus ring: Cyan Ocean 700/400, 2px with offset.
+     700 e não 500 no tema CLARO, e a subida foi em dois passos medidos: o
+     cyan-500 (#0ca8cd) dá 2,33:1 contra o fundo — abaixo do piso 3,0 de
+     elemento não-textual (WCAG 1.4.11), e anel de foco é o indicador de
+     quem navega por teclado. O 600 resolvia isso (3,53), mas o accent
+     inteiro subiu para o 700 depois, porque o RÓTULO branco sobre o 600
+     media 3,68 e reprovava no piso de texto. O anel segue o accent para
+     não virar a parada mais justa da tela: no 700 ele mede 5,34.
+     O escuro segue no 400: sobre #0a0a0a ele folga (8,89).
+     Vigiado por tests/unit/branding-contraste.test.ts. */
   :focus-visible {
-    outline: 2px solid var(--color-accent-600);
+    outline: 2px solid var(--color-accent-700);
     outline-offset: 2px;
     border-radius: var(--radius-sm);
   }
