@@ -8,7 +8,7 @@ O CloudyX CRM é uma ferramenta operacional para **atendentes que ficam 8 horas 
 
 Por isso a direção é **soft-tech / calmo**:
 
-- **Soft** — neutros greige (warm-gray), nunca slate/zinc; acentos baixos em saturação; sombras em cor neutra, não preto puro.
+- **Soft** — neutros ACROMÁTICOS (R=G=B), nunca slate/zinc/greige; uma única cor de destaque; sombras em três camadas com luz única no alto.
 - **Tech** — tipografia precisa, dados em mono tabular, hierarquia disciplinada, microinterações com propósito.
 - **Calmo** — sem decoração, sem celebração, sem AI-sparkle, sem gradientes. Confiança vem de consistência, não de efeito.
 
@@ -38,7 +38,7 @@ Leia 00 → 09 sequencial uma vez. Depois consulte por demanda via tabela do `RE
 
 ## Versionamento
 
-- **v1.0 — locked em 2026-04-28.** As 5 escolhas (Sage, Atkinson, Aerada, Phosphor, IBM Plex Mono) estão fechadas até v2.0. PRs que tentem trocar uma delas precisam de RFC.
+- **v2.0 — a paleta foi trocada no fork.** Das 5 escolhas travadas em v1.0 (Sage, Atkinson, Aerada, Phosphor, IBM Plex Mono), a primeira saiu: Mono + Cyan Ocean. As outras quatro seguem fechadas e ainda pedem RFC.
 - Patches são aceitos para: novos ícones, novos exemplos de microcopy, ajustes de hex em ±2 pontos de luminosidade quando WCAG falhar, novos componentes derivados.
 - Histórico de mudanças vai em `CHANGELOG.md` quando houver primeira mudança.
 
@@ -49,6 +49,6 @@ A linguagem do CloudyX CRM toma emprestado partes específicas (não estética i
 - **Arc browser** — sidebar como "casa", microinterações de hover com propósito espacial, paleta neutra com 1 accent destacado.
 - **Notion** — densidade aerada (row 56 / gap 24), tipografia humanista grande, hierarquia por peso e tamanho mais que por cor.
 - **Things 3** — calma absoluta, ausência de ornamento, ícones com peso próprio, mono para dados (datas, contadores).
-- **Mercury (banking)** — confiança operacional via consistência, paleta greige, números em tabular nums, tom de voz sóbrio em microcopy.
+- **Mercury (banking)** — confiança operacional via consistência, paleta contida, números em tabular nums, tom de voz sóbrio em microcopy.
 
 O que **não** importamos: o Geist sans da Vercel/Linear (saturação de mercado), o roxo Linear (overuse), o glass do Mercury (mais tarefa que valor), os gradientes do Arc.

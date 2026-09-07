@@ -109,8 +109,13 @@ describe("marcaDaSaida — o piso", () => {
     // Controle positivo do item 2 do cabeçalho: se alguém trocar o índice em
     // `saida.ts` por outro grau, a igualdade abaixo continua valendo pelo lado
     // errado — por isso a asserção seguinte prende o ÍNDICE, que é a decisão.
-    expect(REGUA_DO_PRODUTO.claro.indices.accent).toBe(6);
-    expect(ACCENT_DO_PRODUTO).toBe(REGUA_DO_PRODUTO.rampaDoProduto[6]);
+    // 7, e não 6: o accent do tema claro subiu de parada quando se mediu que o
+    // rótulo branco sobre o cyan-600 dava 3,68:1, abaixo do piso 4,5 de texto.
+    // Este caso é o que garante que o E-MAIL andou junto — sem ele, a interface
+    // ficaria com um tom e o botão dos e-mails com outro, e ninguém veria até
+    // alguém pôr os dois lado a lado.
+    expect(REGUA_DO_PRODUTO.claro.indices.accent).toBe(7);
+    expect(ACCENT_DO_PRODUTO).toBe(REGUA_DO_PRODUTO.rampaDoProduto[7]);
   });
 
   it("a frente do accent é CALCULADA, nunca branco fixo", async () => {

@@ -115,11 +115,11 @@
   --radius-full: 9999px;
 
   /* Shadows — desaturated, neutral-based */
-  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 1px 0 rgba(0, 0, 0, 0.03);
-  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 12px 32px -6px rgba(0, 0, 0, 0.10), 0 4px 12px -2px rgba(0, 0, 0, 0.06);
-  --shadow-xl: 0 24px 48px -12px rgba(0, 0, 0, 0.16), 0 8px 16px -4px rgba(0, 0, 0, 0.08);
+  --shadow-xs: 0 1px 1px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  --shadow-sm: 0 1px 1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.04), 0 4px 8px -2px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 1px 2px 0 rgba(0, 0, 0, 0.04), 0 4px 8px -2px rgba(0, 0, 0, 0.05), 0 12px 20px -6px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 2px 4px -1px rgba(0, 0, 0, 0.04), 0 8px 16px -4px rgba(0, 0, 0, 0.07), 0 24px 40px -12px rgba(0, 0, 0, 0.09);
+  --shadow-xl: 0 4px 8px -2px rgba(0, 0, 0, 0.05), 0 16px 32px -8px rgba(0, 0, 0, 0.10), 0 40px 72px -20px rgba(0, 0, 0, 0.14);
 
   /* Density — Aerada */
   --density-row: 56px;
@@ -292,11 +292,11 @@
   --color-info: #1d4ed8;
   --color-info-bg: rgba(29, 78, 216, 0.12);
   --color-info-fg: #1e40af;
-  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 1px 0 rgba(0, 0, 0, 0.03);
-  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 12px 32px -6px rgba(0, 0, 0, 0.10), 0 4px 12px -2px rgba(0, 0, 0, 0.06);
-  --shadow-xl: 0 24px 48px -12px rgba(0, 0, 0, 0.16), 0 8px 16px -4px rgba(0, 0, 0, 0.08);
+  --shadow-xs: 0 1px 1px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  --shadow-sm: 0 1px 1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.04), 0 4px 8px -2px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 1px 2px 0 rgba(0, 0, 0, 0.04), 0 4px 8px -2px rgba(0, 0, 0, 0.05), 0 12px 20px -6px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 2px 4px -1px rgba(0, 0, 0, 0.04), 0 8px 16px -4px rgba(0, 0, 0, 0.07), 0 24px 40px -12px rgba(0, 0, 0, 0.09);
+  --shadow-xl: 0 4px 8px -2px rgba(0, 0, 0, 0.05), 0 16px 32px -8px rgba(0, 0, 0, 0.10), 0 40px 72px -20px rgba(0, 0, 0, 0.14);
   --background: var(--color-bg);
   --foreground: var(--color-text);
   --card: var(--color-surface);
@@ -393,11 +393,11 @@
   --color-info-fg: #93c5fd;
 
   /* Shadows — heavier in dark */
-  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.30);
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.40), 0 1px 1px 0 rgba(0, 0, 0, 0.20);
-  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.45), 0 2px 4px -1px rgba(0, 0, 0, 0.30);
-  --shadow-lg: 0 12px 32px -6px rgba(0, 0, 0, 0.55), 0 4px 12px -2px rgba(0, 0, 0, 0.40);
-  --shadow-xl: 0 24px 48px -12px rgba(0, 0, 0, 0.65), 0 8px 16px -4px rgba(0, 0, 0, 0.50);
+  --shadow-xs: 0 1px 1px 0 rgba(0, 0, 0, 0.34), 0 1px 3px 0 rgba(0, 0, 0, 0.26);
+  --shadow-sm: 0 1px 1px 0 rgba(0, 0, 0, 0.40), 0 2px 6px -1px rgba(0, 0, 0, 0.34), 0 6px 12px -3px rgba(0, 0, 0, 0.26);
+  --shadow-md: 0 1px 2px 0 rgba(0, 0, 0, 0.44), 0 6px 12px -3px rgba(0, 0, 0, 0.40), 0 16px 28px -8px rgba(0, 0, 0, 0.34);
+  --shadow-lg: 0 2px 4px -1px rgba(0, 0, 0, 0.48), 0 12px 24px -6px rgba(0, 0, 0, 0.48), 0 32px 52px -16px rgba(0, 0, 0, 0.44);
+  --shadow-xl: 0 4px 8px -2px rgba(0, 0, 0, 0.52), 0 20px 40px -10px rgba(0, 0, 0, 0.56), 0 48px 88px -24px rgba(0, 0, 0, 0.52);
 
   /* shadcn-compat aliases */
   --background: var(--color-bg);
@@ -917,5 +917,172 @@
   .agenda-coluna-horarios {
     transition: none;
     transform: none;
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════════════════
+   CAMADA DE MATERIALIDADE — profundidade, inclinação 3D e coreografia
+
+   Lei: docs/design-system/07-motion-language.md. O que está aqui obedece a
+   ela, e os limites não são sugestão — cada um tem um modo de falha medido
+   escrito ao lado.
+
+   POR QUE ISTO É CSS, E NÃO GSAP: hover, press e foco têm de funcionar ANTES
+   de a hidratação terminar, e é no primeiro segundo que a pessoa passa o
+   mouse. Card que só fica pegável depois do JS é card quebrado — e o defeito
+   nunca aparece em dev, onde tudo já está carregado. GSAP entra só onde CSS
+   não alcança: perseguir um alvo que se move (a inclinação) e orquestrar
+   sequência com dependência entre passos. Ver `lib/motion/`.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/* ---- Card interativo: a materialidade mínima ---------------------------
+   Sobe no hover, VOLTA no press. O press desfazer o hover (em vez de
+   aprofundá-lo) é o que faz o gesto parecer uma mão empurrando para baixo;
+   press que afunda mais que o repouso parece o card fugindo do dedo.
+
+   `border-color` anda junto com a sombra e as duas contam como UMA
+   informação ("isto é pegável") — é a exceção declarada à regra de duas
+   propriedades. `transition` lista o que muda: `all` pegaria `width` e
+   `height`, que são caras. */
+.cartao-interativo {
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+  will-change: transform;
+}
+.cartao-interativo:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-strong);
+}
+.cartao-interativo:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+  transition-duration: var(--duration-fast);
+}
+
+/* ---- Inclinação 3D -----------------------------------------------------
+   As rotações chegam por `--rx` / `--ry`, escritas em JS a partir do
+   ponteiro (lib/motion/inclinacao.ts). O CSS não sabe onde o mouse está; o
+   JS não sabe animar melhor que o compositor. Cada um faz o seu.
+
+   `perspective` no PRÓPRIO elemento e não no pai: pôr no pai faz todos os
+   irmãos compartilharem um ponto de fuga, e cards lado a lado passam a
+   inclinar como se fossem um objeto só.
+
+   O teto de 6° mora no JS, não aqui — este arquivo apenas consome. Ver o
+   cabeçalho de `inclinacao.ts` para o porquê do número. */
+.cartao-3d {
+  --rx: 0deg;
+  --ry: 0deg;
+  --brilho-x: 50%;
+  --brilho-y: 50%;
+  --brilho-forca: 0;
+  position: relative;
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
+  transform-style: preserve-3d;
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+  will-change: transform;
+}
+.cartao-3d:hover {
+  box-shadow: var(--shadow-lg);
+}
+/* Enquanto o ponteiro está sobre o card, quem manda no transform é o JS —
+   a transição aqui atrapalharia (ela interpolaria o que já vem
+   interpolado). O `data-inclinando` é escrito no enter/leave. */
+.cartao-3d[data-inclinando="true"] {
+  transition: box-shadow var(--duration-base) var(--ease-out);
+}
+
+/* O brilho especular: um `radial-gradient` que segue o ponteiro. Sem ele a
+   rotação parece papel dobrando; com a luz acompanhando, parece superfície
+   sólida girando sob uma lâmpada.
+
+   `pointer-events: none` é obrigatório — sem isso a camada engole o clique
+   do card inteiro, e o defeito é silencioso (o card só "para de funcionar"). */
+.cartao-3d::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: var(--brilho-forca);
+  transition: opacity var(--duration-base) var(--ease-out);
+  background: radial-gradient(
+    circle at var(--brilho-x) var(--brilho-y),
+    color-mix(in srgb, var(--color-surface) 70%, transparent) 0%,
+    transparent 55%
+  );
+}
+
+/* ---- Press ------------------------------------------------------------- */
+.pressionavel {
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+.pressionavel:active {
+  transform: translateY(1px) scale(0.985);
+}
+
+/* ---- Coreografia de entrada -------------------------------------------
+   `--i` é o índice do item, escrito no style inline. Teto de 8 (320ms no
+   total — o mesmo teto de uma page transition): acima disso o último item
+   chega depois de a pessoa já ter começado a ler o primeiro.
+
+   UMA VEZ POR MONTAGEM. Item que chega por scroll, refetch ou realtime NÃO
+   leva esta classe: numa fila que se atualiza sozinha, stagger transforma
+   cada chegada num evento visual e o operador perde o único sinal que
+   importa — o que de fato mudou. */
+@keyframes cloudyx-entrada {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.entrada {
+  animation: cloudyx-entrada var(--duration-slow) var(--ease-out) both;
+}
+.cascata > * {
+  animation: cloudyx-entrada var(--duration-slow) var(--ease-out) both;
+  animation-delay: calc(min(var(--i, 0), 8) * 40ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* O destino é o MESMO — só chega sem o percurso. Nada aqui esconde
+     conteúdo nem entrega uma versão pior: o card continua pegável (a
+     elevação fica), o brilho e a rotação somem, e a cascata chega junta. */
+  .cartao-interativo,
+  .cartao-3d,
+  .pressionavel {
+    transition-property: box-shadow, border-color;
+  }
+  .cartao-interativo:hover,
+  .cartao-3d,
+  .pressionavel:active {
+    transform: none;
+  }
+  .cartao-3d::after {
+    display: none;
+  }
+  .entrada,
+  .cascata > * {
+    animation: none;
+  }
+}
+
+/* Toque não tem hover: sem isto o card ficaria inclinado e PRESO depois do
+   tap, porque não existe evento de saída para desfazer. */
+@media (hover: none), (pointer: coarse) {
+  .cartao-3d {
+    transform: none;
+  }
+  .cartao-3d::after {
+    display: none;
   }
 }

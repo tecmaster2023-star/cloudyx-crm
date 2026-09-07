@@ -1,163 +1,136 @@
-# 02 — Paleta Sage
+# 02 — Paleta Mono + Cyan Ocean
 
-> **Source of truth:** `app/design/lib/tokens.ts` → `PALETTES.sage`
+> **Source of truth:** `app/globals.css` (blocos `:root`, `[data-theme="light"]`, `[data-theme="dark"]`).
+> O `app/design/lib/tokens.ts` → `PALETTES.monoCyan` é o espelho do showcase; divergiu, o CSS está certo.
 
 ## Filosofia da paleta
 
-Sage é verde-erva desaturado: o suficiente pra ter personalidade vegetal, longe o suficiente pra não evocar o cliché "wellness/saúde mental". O CloudyX CRM é uma ferramenta de **trabalho operacional**, e Sage projeta:
+**Preto e branco, com uma cor.** Os neutros são cinza puro (`R = G = B`); a única cor do sistema é um cyan oceânico. Não é minimalismo por estética — é uma regra de leitura:
 
-- **Calma sem fragilidade** — saturação ≤ 30% no accent 500 evita a sensação clínica.
-- **Confiança warm** — neutros greige (warm-gray, base bege/oliva) ao invés de slate/zinc, que carregam tom corporativo frio.
-- **Anti-genérico** — 80%+ dos CRMs SaaS usam blue/indigo/violet. Sage diverge sem cair em cores de risco (laranja, vermelho, rosa).
-- **Funcional em monitores 8h/dia** — luminosidade calibrada pra não cansar; backgrounds nunca puro `#fff` (offwhite warm) nem puro `#000` (very-dark warm).
+- **Cor significa alguma coisa.** Numa interface acromática, tudo que tem cor é ação, estado ou alerta. O olho aprende isso em minutos e para de varrer.
+- **Neutro sem tempero não briga com marca nenhuma.** O produto é white-label: greige quente conflitava com a marca de qualquer cliente que não fosse quente. Cinza puro aceita cyan, roxo, laranja ou o que o cliente trouxer.
+- **Funcional em monitor 8h/dia.** Fundo nunca é `#ffffff` puro (reflete demais em sessão longa) nem `#000000` puro (halo em texto claro).
 
-A paleta tem **dois temas desenhados independentemente**, não invertidos. Light não é dark com inversão de luminosidade; cada um foi calibrado pra contraste e conforto na sua direção.
+A paleta tem **dois temas desenhados independentemente**, não invertidos.
 
-## Light theme — accent (Sage verde)
+## A rampa é DERIVADA, não escolhida
 
-| Stop | Hex | Uso prescrito |
-|------|-----|---------------|
-| 50 | `#f3f6f1` | Background de hover muito sutil, soft chip background |
-| 100 | `#e4ebe0` | `--ds-accent-soft` — bg de badge accent, hover de nav-link, focus ring outer |
-| 200 | `#c8d6c1` | Borders de elementos accent secundários |
-| 300 | `#a4ba9a` | Disabled state do accent, decorative dividers |
-| 400 | `#82a077` | Hover de elementos accent claros |
-| 500 | `#67885d` | **Brand accent canônico** — botão primary bg, link, focus ring color |
-| 600 | `#506d48` | Hover de primary button (escurece) |
-| 700 | `#41573b` | Pressed state de primary button |
-| 800 | `#374731` | Texto sobre fundos accent claros (a11y AAA) |
-| 900 | `#2f3c2b` | — (raramente usado em light) |
-| 950 | `#171f15` | — (uso extremo, evite) |
+As onze paradas do accent saem de `rampaDeSemente("#0891b2")` — o mesmo algoritmo que gera a rampa de um cliente que escolhe a cor dele. Isso não é detalhe de implementação: é o que faz a régua de contraste do produto significar a mesma coisa para nós e para quem compra a marca própria.
 
-## Light theme — neutral greige
+`tests/unit/branding-rampa.test.ts` reprova se o CSS divergir da derivação em mais de **2/255 por canal**. Colar uma escala pronta (a do Tailwind, por exemplo) reprova — foi medido, com distância de até 119/255.
 
-| Stop | Hex | Uso prescrito |
-|------|-----|---------------|
-| 50 | `#faf9f6` | `--ds-bg` — page background (offwhite warm) |
-| 100 | `#f3f1ec` | Background de seções, alt-row de tabela |
-| 200 | `#e7e3da` | `--ds-border` — borders default |
-| 300 | `#d2cdbf` | Borders mais firmes, divider de tabela |
-| 400 | `#a9a395` | Placeholder text, ícone disabled |
-| 500 | `#7d786c` | Texto utilitário (timestamp, helper) |
-| 600 | `#5d594f` | `--ds-text-muted` — texto secundário, label |
-| 700 | `#46433b` | Texto importante mas não primary |
-| 800 | `#2e2c26` | Heading secundário |
-| 900 | `#1c1a16` | `--ds-text` — texto primary (corpo, headings) |
-| 950 | `#0e0d0a` | Texto extremamente alto contraste (raro) |
-
-**Surfaces light:**
-- `bg`: `#faf9f6` — página
-- `surface`: `#ffffff` — cards e superfícies elevadas (puro branco)
-- `surfaceElevated`: `#f5f3ee` — alt-bg, header, dropdown bg
-- `text`: `#1c1a16` / `textMuted`: `#5d594f` / `border`: `#e7e3da`
-
-## Dark theme — accent (Sage verde, ajustado)
-
-| Stop | Hex | Uso prescrito |
-|------|-----|---------------|
-| 50 | `#f3f6f1` | Texto sobre fundo accent escuro (raro) |
-| 100 | `#e4ebe0` | — |
-| 200 | `#c8d6c1` | — |
-| 300 | `#a4ba9a` | Hover state em link |
-| 400 | `#82a077` | **Brand accent em dark** — primary button bg, link, focus |
-| 500 | `#67885d` | Versão "calma" do accent em dark, alguns hovers |
-| 600 | `#506d48` | Hover ainda mais escuro (raro) |
-| 700 | `#41573b` | Border accent em dark |
-| 800 | `#374731` | Soft accent bg (badges) |
-| 900 | `#2f3c2b` | Soft accent bg (mais discreto) |
-| 950 | `#171f15` | Background quase invisível (decorativo) |
-
-> **Nota:** em dark, o "primary" sobe pro stop 400 (mais luminoso) pra preservar contraste sobre fundos escuros.
-
-## Dark theme — neutral greige
-
-| Stop | Hex | Uso prescrito |
-|------|-----|---------------|
-| 50 | `#f5f4ef` | `--ds-text` — texto primary em dark |
-| 100 | `#e6e4dc` | Texto sobre surface escuro (alta hierarquia) |
-| 200 | `#bbb8ac` | Texto importante em dark |
-| 300 | `#8e8b7f` | `--ds-text-muted` — texto secundário |
-| 400 | `#605e54` | Placeholder, helper |
-| 500 | `#444239` | Disabled |
-| 600 | `#33312a` | `--ds-border` — borders default |
-| 700 | `#272620` | `--ds-surface-elevated` — header, dropdown |
-| 800 | `#1d1c17` | `--ds-surface` — cards |
-| 900 | `#161510` | `--ds-bg` — page background (very-dark warm) |
-| 950 | `#0c0b08` | Voids decorativos (raro) |
-
-**Surfaces dark:**
-- `bg`: `#161510` — página (NÃO `#000` nem `#0a0a0a`; warm-tinted)
-- `surface`: `#1d1c17` — cards
-- `surfaceElevated`: `#272620` — header, dropdown
-- `text`: `#f5f4ef` / `textMuted`: `#8e8b7f` / `border`: `#33312a`
-
-## Estados (success / warning / error / info)
-
-Estados têm versões light e dark calibradas. Saturação fica ≤ 55% em light, ≤ 65% em dark (mantém calma).
-
-| Estado | Light | Dark | Uso |
-|--------|-------|------|-----|
-| `success` | `#5a8a5f` | `#82a077` | Confirmação positiva, status "ativo", "lido" |
-| `warning` | `#b07a2b` | `#d09455` | Atenção sem urgência, SLA próximo de vencer |
-| `error` | `#a94a3c` | `#c87263` | Erro, ação destrutiva, SLA estourado |
-| `info` | `#4a7a93` | `#7da9bf` | Mensagem informativa, dica |
-
-**Como aplicar estados (3 padrões):**
-
-```css
-/* 1. Como bg de badge: estado a 14% transparência + estado como fg */
-.badge-success {
-  background: color-mix(in srgb, var(--ds-success) 14%, transparent);
-  color: var(--ds-success);
-}
-
-/* 2. Como border (foco específico): full opacity */
-.input-error { border-color: var(--ds-error); }
-
-/* 3. Como bg de botão destrutivo: full opacity, fg branco */
-.btn-destructive { background: var(--ds-error); color: #fff; }
+```bash
+# a rampa em vigor, sem confiar nesta página
+grep -A 11 'color-accent-50' app/globals.css | head -12
 ```
 
-## Contraste WCAG
+---
 
-Validações realizadas pela paleta:
+## Light theme
 
-| Combinação | Ratio | Nível | OK pra |
-|------------|-------|-------|--------|
-| `text` (`#1c1a16`) sobre `bg` (`#faf9f6`) | ~14.8:1 | AAA | Prosa longa, body text |
-| `text-muted` (`#5d594f`) sobre `bg` | ~6.7:1 | AA+ | Secondary, helper, timestamps |
-| `accent-500` (`#67885d`) sobre `bg` | ~4.6:1 | AA | Texto UI 14px+, botão primary |
-| `accent-700` (`#41573b`) sobre `accent-soft` | ~7.2:1 | AAA | Link em chip, label sobre badge |
-| Dark: `text` (`#f5f4ef`) sobre `bg` (`#161510`) | ~14.1:1 | AAA | Body text |
-| Dark: `accent-400` (`#82a077`) sobre `bg` | ~5.9:1 | AA+ | Link, primary |
-| `error` light (`#a94a3c`) sobre `bg` | ~4.7:1 | AA | UI text 14px+ |
+| Papel | Token | Hex |
+|---|---|---|
+| Fundo da página | `--color-bg` | `#fafafa` |
+| Superfície (card) | `--color-surface` | `#ffffff` |
+| Superfície elevada | `--color-surface-elevated` | `#f5f5f5` |
+| Texto | `--color-text` | `#171717` |
+| Texto secundário | `--color-text-muted` | `#525252` |
+| Texto sutil | `--color-text-subtle` | `#737373` |
+| Borda | `--color-border` | `#e5e5e5` |
+| Borda forte | `--color-border-strong` | `#d4d4d4` |
 
-**Regras:**
-- Body text e prosa: AAA mínimo (`text` + `bg`).
-- UI text 14px+: AA mínimo (4.5:1).
-- Componentes não-textuais (borders, ícones): AA UI mínimo (3:1).
-- Nunca usar `text-muted` para texto em prosa longa (apenas labels, helpers, timestamps).
+**Accent (Cyan Ocean):**
 
-## Anti-padrões — como NÃO usar Sage
+| Parada | Hex | Onde |
+|---|---|---|
+| 50 | `#edf7fb` | fundo de faixa muito suave |
+| 100 | `#d8f0f9` | `--color-accent-soft` — chip, badge, hover de item |
+| 200 | `#b3e2f3` | borda de chip |
+| 300 | `#81cee8` | — |
+| 400 | `#47bbde` | accent do tema **escuro** |
+| 500 | `#0ca8cd` | — |
+| **600** | **`#0891b2`** | **a semente**; tinta de realce, ícone sobre suave |
+| **700** | **`#17718a`** | **`--color-accent`** — botão primário, link, anel de foco |
+| 800 | `#195a6d` | `--color-accent-hover` |
+| 900 | `#1a4a58` | — |
+| 950 | `#042029` | texto sobre suave |
 
-❌ **Saturar accent além de 600.** Stops 700–950 só pra texto em fundo claro accent, nunca como bg de área grande.
+**Por que o accent de repouso é o 700 e não o 600, que é a semente:** medido, o rótulo branco sobre o 600 dá **3,68:1** — abaixo do piso 4,5 de texto. O botão mais usado do produto ficaria reprovado pela régua do próprio sistema. No 700 o rótulo mede 5,58 e o accent contra o fundo sobe de 3,53 para 5,34, o que também o torna seguro como texto de link. A semente continua em uso na parada 600 e continua sendo de onde a rampa inteira nasce.
 
-❌ **Accent como bg de toda a sidebar.** Sidebar é greige (`surface` ou `surface-elevated`). Accent na sidebar fica como hover-state e active-state apenas.
+## Dark theme
 
-❌ **Accent em texto de longa leitura.** Body de e-mail, descrição de pedido, prosa de doc — tudo `text` (`#1c1a16`). Accent só em link, label de status, ações.
+| Papel | Token | Hex |
+|---|---|---|
+| Fundo | `--color-bg` | `#0a0a0a` |
+| Superfície | `--color-surface` | `#141414` |
+| Superfície elevada | `--color-surface-elevated` | `#1f1f1f` |
+| Texto | `--color-text` | `#fafafa` |
+| Texto secundário | `--color-text-muted` | `#a3a3a3` |
+| Borda | `--color-border` | `#262626` |
+| Accent | `--color-accent` | `#47bbde` (parada 400) |
+| Rótulo sobre accent | `--color-accent-fg` | `#0a0a0a` |
+| Accent suave | `--color-accent-soft` | `rgba(71, 187, 222, 0.16)` |
 
-❌ **`#000` ou `#fff` puro.** Texto preto puro contra bg warm-offwhite cria vibração; use `#1c1a16` e `#faf9f6`.
+No escuro o accent **sobe** a rampa (400, não 700): sobre fundo quase preto, a parada escura desapareceria. E o rótulo inverte para escuro, porque o cyan claro é a superfície agora.
 
-❌ **Misturar Sage com cores fora dos estados.** Não importe roxo, azul-bandeira, ciano — não fazem parte do sistema. Se precisa diferenciar tags do usuário, use stops do greige + 1 acento; se precisa de cores categóricas (gráfico), abrir RFC.
+`--color-accent-soft` do escuro é **translúcido**, e por isso compõe sobre cada base — as três razões diferem, e a régua mede as três. É o par mais justo do tema escuro.
 
-❌ **Gradients accent → accent.** Sage não usa gradients; use solid + shadow se precisar profundidade.
+## Estados
 
-## Acessibilidade (visão de cor)
+Continuam **coloridos** de propósito: numa interface acromática, verde/âmbar/vermelho/azul são função, não marca. Um erro em cinza não se lê.
 
-Sage foi escolhida também por segurança em deficiências de visão:
+| Estado | Light | Dark |
+|---|---|---|
+| success | `#15803d` | `#4ade80` |
+| warning | `#b45309` | `#fbbf24` |
+| error | `#b91c1c` | `#f87171` |
+| info | `#1d4ed8` | `#60a5fa` |
 
-- **Deuteranopia** (verde-cego, ~6% homens): Sage 500 vira marrom-acinzentado dessaturado; mantém 4.2:1 contra bg, ainda AA. Diferenciação verde-vermelho dos estados (success vs error) preservada porque error é warm-red (não puro green/red).
-- **Protanopia** (vermelho-cego): comportamento similar; Sage 500 vira amarelo-oliva.
-- **Tritanopia** (azul-amarelo, raro): menos afetada — Sage permanece reconhecível como verde dessaturado.
+O **info é azul, não cyan**, e a distância é deliberada: info em cyan se confundiria com "isto é uma ação".
 
-Em todos os casos, **nunca dependa só de cor pra comunicar estado**. Use ícone Phosphor + cor + label de texto. Ex: badge de SLA estourado tem cor error, ícone `Warning`, e texto "Vencido há 2h".
+## Contraste — medido, não estimado
+
+| Combinação | Razão | Nível |
+|---|---|---|
+| `text` `#171717` sobre `bg` `#fafafa` | **17,18:1** | AAA |
+| `text-muted` `#525252` sobre `bg` | **7,49:1** | AAA |
+| `text-subtle` `#737373` sobre `bg` | **4,54:1** | AA (só label/timestamp) |
+| `accent` `#17718a` sobre `bg` | **5,34:1** | AA |
+| rótulo `#ffffff` sobre `accent` | **5,58:1** | AA |
+| `accent-700` sobre `accent-soft` | **4,71:1** | AA |
+| `error` `#b91c1c` sobre `bg` | **6,20:1** | AA+ |
+| Dark: `text` sobre `bg` | **18,97:1** | AAA |
+| Dark: `accent` `#47bbde` sobre `bg` | **8,89:1** | AAA |
+
+Para remedir sem confiar nesta tabela:
+
+```bash
+pnpm exec vitest run tests/unit/branding-contraste.test.ts
+```
+
+**Pisos:** prosa e body → AAA. Texto de UI 14px+ → AA (4,5). Elemento não-textual (borda, ícone, **anel de foco**) → 3,0.
+
+⚠️ **`text-subtle` fica em 4,54 — a margem é de 0,04.** Ele serve a label, timestamp e helper, nunca a prosa. Escurecer o fundo um degrau o derruba.
+
+## Anti-padrões
+
+❌ **Neutro tingido.** Se o hex não tem `R = G = B`, não é neutro deste sistema. Nada de zinc, slate, stone ou greige.
+
+❌ **Accent como fundo de área grande.** Sidebar, header, painel inteiro. Cyan saturado em área grande cansa em 8h. Accent é ação, e ação é pontual.
+
+❌ **Accent em texto de leitura longa.** Corpo de mensagem, descrição, prosa — tudo `text`.
+
+❌ **`#ffffff` como fundo de página no claro.** Reflete demais em sessão longa. O fundo é `#fafafa`; `#ffffff` é a superfície do card, e é o contraste entre os dois que faz o card existir.
+
+❌ **Importar cor fora dos estados.** Roxo, rosa, laranja não fazem parte. Tag de usuário usa as paradas do cinza mais o accent; gráfico com categorias abre RFC.
+
+❌ **Trocar a semente editando o CSS.** A cor da instalação é configuração (`APP_ACCENT_HEX`, ou a tela de Marca), não código. Ver `docs/white-label.md`.
+
+## Acessibilidade — visão de cor
+
+Cyan é mais seguro que o verde que ele substituiu, e a razão é o canal:
+
+- **Deuteranopia e protanopia** (~8% dos homens): o canal azul é preservado, então o cyan continua distinto do `error` (vermelho) e do `warning` (âmbar). O verde da paleta anterior colidia com essas duas.
+- **Tritanopia** (azul-amarelo, rara): aqui o cyan é o caso pior — ele desloca para um cinza-esverdeado e a distância para o `info` encolhe. É a razão de o `info` ser azul-escuro e não outro cyan.
+
+**Em todos os casos, nunca dependa só de cor.** Estado leva ícone + cor + rótulo. Um SLA vencido tem cor `error`, ícone `Warning` e o texto "Vencido há 2h" — quem não distingue a cor lê os outros dois.

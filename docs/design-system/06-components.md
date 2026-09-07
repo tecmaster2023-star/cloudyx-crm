@@ -282,7 +282,7 @@ Avatar (sm/md) com tooltip mostrando nome do owner. Suporta "unassigned" (ícone
 
 ## TagPill
 
-Badge especializada para tags livres (cliente VIP, frete-grátis, etc.). Cor neutra default; usuário pode escolher de palette restrita (5 stops do greige + accent). Suporta close button (`X` 12px) em modo editável.
+Badge especializada para tags livres (cliente VIP, frete-grátis, etc.). Cor neutra default; usuário pode escolher de palette restrita (5 paradas do cinza + accent). Suporta close button (`X` 12px) em modo editável.
 
 ---
 

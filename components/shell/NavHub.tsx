@@ -1,6 +1,8 @@
 import Link from "next/link";
+import type { CSSProperties } from "react";
 
 import { Card } from "@/components/ui/card";
+import { Cartao3D } from "@/components/ui/cartao-3d";
 import type { Role } from "@/lib/auth/types";
 import { traduzir } from "@/lib/i18n/dicionario";
 import { IDIOMA_PADRAO, type Idioma } from "@/lib/i18n/idiomas";
@@ -65,18 +67,33 @@ export function NavHub({ group, isPlatformAdmin, role, title, subtitle, locale =
           >
             {traduzir(section, locale)}
           </h2>
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
-            {items.map((item) => {
+          {/* `cascata`: os cards entram escalonados em 40ms, teto de 8 (ver
+              `app/globals.css` § coreografia). UMA vez, na montagem — o hub não
+              recarrega itens sozinho, então aqui não há o risco de transformar
+              atualização em evento visual, que é o motivo de a regra existir.
+
+              O 3D vale AQUI por ser superfície de exploração: o hub é onde
+              alguém procura, não onde trabalha. Ver a régua das oito horas em
+              `docs/design-system/07-motion-language.md`. */}
+          <div className="cascata grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+            {items.map((item, i) => {
               const Icon = item.icon;
               return (
-                <Link key={item.href} href={item.href} className="block">
-                  <Card className="flex h-full gap-3 p-4 transition-colors hover:border-border-strong">
-                    <Icon size={20} weight="regular" aria-hidden className="mt-0.5 shrink-0 text-muted-foreground" />
-                    <div>
-                      <h3 className="text-sm font-semibold">{traduzir(item.label, locale)}</h3>
-                      <p className="mt-1 text-xs text-muted-foreground">{traduzir(item.description, locale)}</p>
-                    </div>
-                  </Card>
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="block"
+                  style={{ "--i": i } as CSSProperties}
+                >
+                  <Cartao3D>
+                    <Card className="cartao-interativo flex h-full gap-3 p-4">
+                      <Icon size={20} weight="regular" aria-hidden className="mt-0.5 shrink-0 text-muted-foreground" />
+                      <div>
+                        <h3 className="text-sm font-semibold">{traduzir(item.label, locale)}</h3>
+                        <p className="mt-1 text-xs text-muted-foreground">{traduzir(item.description, locale)}</p>
+                      </div>
+                    </Card>
+                  </Cartao3D>
                 </Link>
               );
             })}

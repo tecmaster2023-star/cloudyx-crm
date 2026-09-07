@@ -34,8 +34,8 @@ sai. Gradient proibido é o que decora uma superfície parada.
 
 ## 4. ❌ `bg-zinc-900` ou `bg-slate-900` em dark mode
 
-**Por quê:** zinc/slate são cool-gray geométricos. A paleta é warm (greige). Misturar quebra coerência.
-**✅ Sim:** `bg: #161510` (warm dark canônico). Ver `02-palette-sage.md`.
+**Por quê:** zinc/slate carregam matiz. A paleta é ACROMÁTICA (R=G=B) — qualquer tempero briga com a marca que o cliente traz.
+**✅ Sim:** `bg: #0a0a0a` (o degrau 900 do cinza). Ver `02-palette-mono-cyan.md`.
 
 ---
 
@@ -60,9 +60,9 @@ sai. Gradient proibido é o que decora uma superfície parada.
 
 ---
 
-## 8. ❌ Sage accent como bg de toda a sidebar
+## 8. ❌ Accent como bg de toda a sidebar
 
-**Por quê:** a sidebar é greige (`surface` ou `surface-elevated`). Accent na sidebar fica saturado e cansa em 8h.
+**Por quê:** a sidebar é neutra (`surface` ou `surface-elevated`). Accent em área grande satura e cansa em 8h.
 **✅ Sim:** sidebar `surface`, com hover `accent-soft` em items de nav, active `accent-soft` + text `accent`.
 
 ---
@@ -77,7 +77,7 @@ sai. Gradient proibido é o que decora uma superfície parada.
 ## 10. ❌ `red-500` puro (#ef4444) pra error
 
 **Por quê:** vermelho saturado em UI calma vira alarme. Quebra o tom soft-tech.
-**✅ Sim:** `error: #a94a3c` (light) ou `#c87263` (dark). Saturação ≤ 55%. Ver `02-palette-sage.md`.
+**✅ Sim:** `error: #b91c1c` (light) ou `#f87171` (dark). Ver `02-palette-mono-cyan.md`.
 
 ---
 
