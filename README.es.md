@@ -69,7 +69,7 @@ Ya dentro del VPS:
 
 ```bash
 git clone https://github.com/tecmaster2023-star/cloudyx-crm.git
-cd CloudyX CRM
+cd cloudyx-crm
 bash hostgator-setup-kit/install.sh
 ```
 
@@ -154,7 +154,7 @@ vuelta en el `.env` — sin eso, el siguiente reinicio traería la app rota de n
 ### Desde la terminal
 
 ```bash
-cd /ruta/al/CloudyX CRM
+cd /ruta/al/cloudyx-crm
 bash hostgator-setup-kit/update.sh
 ```
 
@@ -271,7 +271,7 @@ Detalles: [`ARCHITECTURE.md`](ARCHITECTURE.md).
 
 ```bash
 git clone https://github.com/tecmaster2023-star/cloudyx-crm.git
-cd CloudyX CRM
+cd cloudyx-crm
 
 nvm use                     # Node 22
 npm install -g pnpm && pnpm install

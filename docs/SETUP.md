@@ -38,7 +38,7 @@
 - **Cartão de crédito** 💳 — alguns serviços pedem só pra "comprovar identidade" mesmo no plano grátis (Supabase, Sentry). Se ficar dentro do free tier, **não cobram nada**.
 
 **Como o `.env.local` funciona:**
-- Fica na **raiz do projeto**: `/seu-caminho/CloudyX CRM/.env.local`.
+- Fica na **raiz do projeto**: `/seu-caminho/cloudyx-crm/.env.local`.
 - Cada linha é `NOME_DA_VARIAVEL=valor` — sem espaço antes/depois do `=`.
 - Strings com caracteres especiais: envolva em aspas duplas (`"valor com espaço"`).
 - Variáveis com `NEXT_PUBLIC_` no nome são **expostas no browser** — nunca coloque secret aí.

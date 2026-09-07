@@ -159,7 +159,7 @@ No servidor, baixe o projeto e rode o instalador:
 
 ```bash
 git clone https://github.com/tecmaster2023-star/cloudyx-crm.git
-cd CloudyX CRM
+cd cloudyx-crm
 bash hostgator-setup-kit/install.sh
 ```
 

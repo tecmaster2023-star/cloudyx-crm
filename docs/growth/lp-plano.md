@@ -340,7 +340,7 @@ Bloco de código real, copiável:
 
 ```bash
 git clone https://github.com/tecmaster2023-star/cloudyx-crm.git
-cd CloudyX CRM/hostgator-setup-kit
+cd cloudyx-crm/hostgator-setup-kit
 bash install.sh
 ```
 

@@ -484,7 +484,7 @@ seletor do que cada VPS baixa**.
 
 | item | valor |
 |---|---|
-| árvore dona do projeto Docker | `/root/CloudyX CRM` (via label `working_dir`) |
+| árvore dona do projeto Docker | `/root/cloudyx-crm` (via label `working_dir`) |
 | versão | tag exata `v1.9.1`, commit `9507920c` |
 | domínio | responde **307** (redireciona ao login — o esperado) |
 | contêineres | `app`, `worker`, `scheduler` todos `healthy` |

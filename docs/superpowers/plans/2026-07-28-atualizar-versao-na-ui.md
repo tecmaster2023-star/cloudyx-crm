@@ -1550,7 +1550,7 @@ import { apiClient } from "@/lib/api/client";
 import { useSystemVersion } from "@/hooks/system/useSystemVersion";
 import { Button } from "@/components/ui/button";
 
-const COMANDO_MANUAL = "cd CloudyX CRM && bash hostgator-setup-kit/update.sh";
+const COMANDO_MANUAL = "cd cloudyx-crm && bash hostgator-setup-kit/update.sh";
 
 const PASSOS = [
   { chave: "backup", texto: "Guardando uma cópia de segurança dos seus dados" },

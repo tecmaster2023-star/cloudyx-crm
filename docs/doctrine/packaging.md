@@ -251,7 +251,7 @@ Só a árvore que criou os contêineres pode atualizá-los. Uma segunda cópia d
 mesma VPS **recusa** mexer, e diz por quê.
 
 - **Por quê:** `docker compose` deriva o nome do projeto do *basename* do diretório.
-  `/root/CloudyX CRM` e `/root/apagar6/CloudyX CRM` viram ambos `cloudyx-crm` — um
+  `/root/cloudyx-crm` e `/root/apagar6/cloudyx-crm` viram ambos `cloudyx-crm` — um
   conjunto só de contêineres, dois `.env` diferentes. Cada `up -d` recria o parque com as
   credenciais da sua árvore, e a outra passa a falar com serviços que não a reconhecem.
 - **Anti-exemplo real (medido, 2026-08):** o cron rodava o `agent.sh` das duas árvores a
@@ -280,8 +280,8 @@ mesma VPS **recusa** mexer, e diz por quê.
   `update.sh` chamavam o guarda; o `install.sh` não — ele é standalone de propósito (roda
   antes do clone) e tinha a própria varredura de portas, que perguntava só pelo **nome do
   projeto**. Como o nome colide justamente entre cópias irmãs, o instalador de uma aula em
-  `/root/apagar7/CloudyX CRM` concluiu "é a re-execução" ao ver o Caddy de
-  `/root/CloudyX CRM`, subiu por cima e trocou o banco da produção. O sintoma que chegou
+  `/root/apagar7/cloudyx-crm` concluiu "é a re-execução" ao ver o Caddy de
+  `/root/cloudyx-crm`, subiu por cima e trocou o banco da produção. O sintoma que chegou
   primeiro foi "minha senha parou de funcionar" — no outro banco a conta é outra —, o que
   manda a investigação para o lado errado por horas. **Nome de projeto igual não é
   identidade: só a árvore é.**

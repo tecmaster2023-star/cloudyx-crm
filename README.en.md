@@ -68,7 +68,7 @@ Once inside the VPS:
 
 ```bash
 git clone https://github.com/tecmaster2023-star/cloudyx-crm.git
-cd CloudyX CRM
+cd cloudyx-crm
 bash hostgator-setup-kit/install.sh
 ```
 
@@ -154,7 +154,7 @@ broken app back.
 ### From the terminal
 
 ```bash
-cd /path/to/CloudyX CRM
+cd /path/to/cloudyx-crm
 bash hostgator-setup-kit/update.sh
 ```
 
@@ -270,7 +270,7 @@ Details: [`ARCHITECTURE.md`](ARCHITECTURE.md).
 
 ```bash
 git clone https://github.com/tecmaster2023-star/cloudyx-crm.git
-cd CloudyX CRM
+cd cloudyx-crm
 
 nvm use                     # Node 22
 npm install -g pnpm && pnpm install
